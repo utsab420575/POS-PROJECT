@@ -160,6 +160,26 @@ class EmployeeController extends Controller
 
         } // End else Condition
 
+    } // End Method
+
+
+    public function DeleteEmployee($id){
+
+        $employee = Employee::findOrFail($id);
+        $imgPath = public_path($employee->image); // Ensure full path
+
+        if (file_exists($imgPath) && is_file($imgPath)) {
+            unlink($imgPath);
+        }
+
+        Employee::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Employee Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
 
     } // End Method
 }
