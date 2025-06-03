@@ -31,6 +31,10 @@ class EmployeeController extends Controller
             'address' => 'required|max:400',
             'salary' => 'required|max:200',
             'vacation' => 'required|max:200',
+            'experience' => 'required',
+            'image' => 'required',
+        ], [
+            'name.required' => 'This Employee Name Field Is Required',
         ]);
 
         $recive_image = $request->file('image');
