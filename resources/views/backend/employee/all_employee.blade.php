@@ -31,8 +31,9 @@
                                 <tr>
                                     <th>Sl</th>
                                     <th>Image</th>
-                                    <th>Email</th>
+                                    <th>Name</th>
                                     <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Salary</th>
                                     <th>Action</th>
                                 </tr>
@@ -41,12 +42,12 @@
 
                                 <tbody>
                                 @foreach($employee as $key=>$item)
-                                    <tr>More actions
+                                    <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td><img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"></td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
+                                        <td>{{ $item->email }}</td>
                                         <td>{{ $item->salary }}</td>
                                         <td>
                                             <a href="" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
