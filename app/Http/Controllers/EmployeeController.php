@@ -87,4 +87,79 @@ class EmployeeController extends Controller
         return view('backend.employee.edit_employee',compact('employee'));
 
     } // End Method
+
+    public function UpdateEmployee(Request $request){
+
+        $employee_id = $request->id;
+
+        if ($request->file('image')) {
+
+            $recive_image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$recive_image->getClientOriginalExtension();
+
+            // create image manager with desired driver
+            $manager = new ImageManager(new Driver());
+
+            // read image from file system
+            $image = $manager->read($recive_image);
+
+            // resize image proportionally to 300px width
+            //$image->scale(636,852);
+            //resize image without proportionally
+            $image->resize(300,300);
+
+            $path = public_path('upload/employee/');
+            $image->save($path . $name_gen);
+
+            $save_url = 'upload/employee/'.$name_gen;
+
+            Employee::findOrFail($employee_id)->update([
+
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'experience' => $request->experience,
+                'salary' => $request->salary,
+                'vacation' => $request->vacation,
+                'city' => $request->city,
+                'image' => $save_url,
+                'created_at' => Carbon::now(),
+
+            ]);
+
+            $notification = array(
+                'message' => 'Employee Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('all.employee')->with($notification);
+
+        } else{
+
+            Employee::findOrFail($employee_id)->update([
+
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'experience' => $request->experience,
+                'salary' => $request->salary,
+                'vacation' => $request->vacation,
+                'city' => $request->city,
+                'created_at' => Carbon::now(),
+
+            ]);
+
+            $notification = array(
+                'message' => 'Employee Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('all.employee')->with($notification);
+
+        } // End else Condition
+
+
+    } // End Method
 }
