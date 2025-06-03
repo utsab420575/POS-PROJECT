@@ -31,4 +31,5 @@ Route::get('/logout-success', [AdminController::class, 'AdminLogoutPage'])->name
 Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
 Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
 Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
+Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
 require __DIR__.'/auth.php';

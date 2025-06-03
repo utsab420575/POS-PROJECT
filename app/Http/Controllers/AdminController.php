@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class AdminController extends Controller
 {
@@ -70,5 +72,51 @@ class AdminController extends Controller
 
     public function ChangePassword(){
         return view('admin.change_password');
+    }// End Method
+
+
+    public function UpdatePassword(Request $request){
+
+        /// Validation
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+
+        ]);
+
+        /// Match The Old Password
+        if (!Hash::check($request->old_password, Auth::user()->password)) {
+
+            $notification = array(
+                'message' => 'Old Password Dones not Match!!',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+
+        }
+
+        //// Update The New Password
+        // Update password
+      /*  Auth::user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);*/
+
+        /*User::whereId(Auth::user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);*/
+
+        // an instance of the User model, which represents the currently logged-in user.
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+
+        $notification = array(
+                'message' => 'Password Change Successfully',
+                'alert-type' => 'success'
+            );
+
+        return back()->with($notification);
+
     }// End Method
 }
