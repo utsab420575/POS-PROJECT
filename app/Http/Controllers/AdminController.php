@@ -19,8 +19,13 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
 
+
+         $notification = array(
+             'message' => 'Admin Logout Successfully',
+             'alert-type' => 'info'
+         );
         //redirect to login page after logout
-        return redirect('/logout-success');
+        return redirect('/logout-success')->with($notification);
     }
 
     public function AdminLogoutPage(){
