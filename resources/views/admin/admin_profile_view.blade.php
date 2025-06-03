@@ -70,13 +70,14 @@
                 <div class="card">
                     <div class="card-body">
                             <div class="tab-pane" id="settings">
-                                <form>
+                                <form method="POSt" action="{{route('admin.profile.store')}}" enctype="multipart/form-data">
+                                    @csrf
                                     <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Personal Info</h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="firstname" class="form-label">First Name</label>
-                                                <input type="text" class="form-control" id="firstname" value="{{ $adminData->name }}" >
+                                                <label for="name" class="form-label">First Name</label>
+                                                <input type="text" class="form-control" name="name" id="name" value="{{ $adminData->name }}" >
                                             </div>
                                         </div>
 

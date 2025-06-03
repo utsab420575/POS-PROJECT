@@ -29,4 +29,5 @@ Route::get('/logout-success', [AdminController::class, 'AdminLogoutPage'])->name
 
 
 Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
 require __DIR__.'/auth.php';
