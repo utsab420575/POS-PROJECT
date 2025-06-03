@@ -106,6 +106,10 @@ class AdminController extends Controller
         ]);*/
 
         // an instance of the User model, which represents the currently logged-in user.
+        //$user = auth()->user(); same thing
+        // Both are correct
+        //$name1 = auth()->user()->name;
+        //$name2 = Auth::user()->name;
         $user = Auth::user();
         $user->password = Hash::make($request->new_password);
         $user->save();
