@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/employee/{id}','EditEmployee')->name('edit.employee');
         Route::post('/update/employee','UpdateEmployee')->name('employee.update');
         Route::get('/delete/employee/{id}','DeleteEmployee')->name('delete.employee');
+    });
+
+
+    //all route should be use auth middleware
+    Route::controller(CustomerController::class)->group(function(){
+        Route::get('/all/customer','AllCustomer')->name('all.customer');
     });
 });
 require __DIR__.'/auth.php';
