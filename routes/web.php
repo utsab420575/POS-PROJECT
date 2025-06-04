@@ -65,6 +65,8 @@ Route::middleware('auth')->group(function () {
     //all route should be use auth middleware
     Route::controller(SupplierController::class)->group(function(){
         Route::get('/all/supplier','AllSupplier')->name('all.supplier');
+        Route::get('/add/supplier','AddSupplier')->name('add.supplier');
+        Route::post('/store/supplier','StoreSupplier')->name('supplier.store');
     });
 });
 require __DIR__.'/auth.php';
