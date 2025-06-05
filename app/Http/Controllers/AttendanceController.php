@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
     //
-    public function EmployeeAttendenceList(){
+    public function EmployeeAttendanceList(){
 
     } // End Method
 }
