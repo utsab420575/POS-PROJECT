@@ -81,6 +81,8 @@ class SalaryController extends Controller
 
     public function UpdateAdvanceSalary(Request $request){
 
+
+        
         //return $request;
         $salary_id = $request->id;
 
