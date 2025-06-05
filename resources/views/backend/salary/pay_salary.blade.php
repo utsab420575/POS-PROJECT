@@ -18,8 +18,13 @@
                                 <form action="{{route('pay.salary')}}" method="GET" class="d-flex align-items-center gap-2 pb-4">
 
                                     @php
-                                        $defaultMonth = date('F', strtotime('-1 month'));
-                                        $defaultYear = date('Y', strtotime('-1 month'));
+                                        if (!empty($month) && !empty($year)) {
+                                            $defaultMonth = $month;
+                                            $defaultYear = $year;
+                                        } else {
+                                            $defaultMonth = date('F', strtotime('-1 month'));
+                                            $defaultYear = date('Y', strtotime('-1 month'));
+                                        }
                                     @endphp
 
                                         <!-- Month Dropdown -->
