@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
