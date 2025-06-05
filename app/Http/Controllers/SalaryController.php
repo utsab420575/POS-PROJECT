@@ -134,6 +134,12 @@ class SalaryController extends Controller
         return view('backend.salary.pay_salary', compact('employee', 'month', 'year'));
     }// End Method
 
+    public function PayNowSalary($id,Request $request){
+        $month=$request->month;
+        $year=$request->year;
+        $single_employee = Employee::findOrFail($id);
+        return view('backend.salary.paid_salary',compact('single_employee','month','year'));
+    }// End Method
 
 
 

@@ -95,7 +95,7 @@
                                             <td>{{$advanceAmount>0? $advanceAmount:'No Advance'}}</td>
                                             <td>{{$due}}</td>
                                             <td>
-                                                <a href="{{ route('edit.advance.salary',$item->id) }}"
+                                                <a href="{{ route('pay.now.salary',$item->id) }}?month={{ $month }}&year={{ $year }}"
                                                    class="btn btn-blue rounded-pill waves-effect waves-light">Pay Now</a>
 
                                             </td>
