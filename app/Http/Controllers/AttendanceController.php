@@ -88,4 +88,34 @@ class AttendanceController extends Controller
 
     }// End Method
 
+    public function UpdateEmployeeAttendenceStore(Request $request){
+        // Validate input
+        $request->validate([
+            'date' => 'required|date',
+            'attendance' => 'required|array',
+            'attendance.*.status' => 'required|in:present,leave,absent',
+        ]);
+
+        $date = date('Y-m-d', strtotime($request->date));
+
+        /*[
+          'attendance' => [
+              100 => ['status' => 'present'],   // from $employee->id = 100
+              101 => ['status' => 'leave'],     // from $employee->id = 101
+              102 => ['status' => 'absent'],    // from $employee->id = 102
+          ]
+      ]*/
+        foreach ($request->attendance as $employeeId => $data) {
+            Attendance::updateOrCreate(
+                ['employee_id' => $employeeId, 'date' => $date],
+                ['status' => $data['status']]
+            );
+        }
+
+        return redirect()->route('employee.attend.list')->with([
+            'message' => 'Attendance updated successfully.',
+            'alert-type' => 'success'
+        ]);
+    }
+
 }

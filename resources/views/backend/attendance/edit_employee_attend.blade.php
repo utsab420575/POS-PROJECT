@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="" method="POST" id="attendanceForm">
+                            <form action="{{route('employee.attendance.update')}}" method="POST" id="attendanceForm">
                                 @csrf
                                 <div class="form-group col-md-4">
                                     <label for="date">Attendance Date</label>
