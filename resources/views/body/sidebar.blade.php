@@ -123,7 +123,7 @@
                                 <a href="{{route('add.advance.salary')}}">Add Advance Salary</a>
                             </li>
                             <li>
-                                <a href="{{ route('add.supplier') }}">Add Supplier</a>
+                                <a href="{{ route('all.advance.salary') }}">All Advance Salary</a>
                             </li>
                         </ul>
                     </div>

@@ -60,5 +60,14 @@ class SalaryController extends Controller
 
     }// End Method
 
+    //ALl Advance Salary Show in blade
+    public function AllAdvanceSalary(){
+
+        $salary = AdvanceSalary::latest()->get();
+
+        return view('backend.salary.all_advance_salary',compact('salary'));
+
+    }// End Method
+
 
 }
