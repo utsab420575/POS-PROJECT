@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    //all route should be use auth middleware
+    //Supplier All Route
     Route::controller(SupplierController::class)->group(function () {
         Route::get('/all/supplier', 'AllSupplier')->name('all.supplier');
         Route::get('/add/supplier', 'AddSupplier')->name('add.supplier');
@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
+    //Advance Salary All Route
     Route::controller(SalaryController::class)->group(function () {
         Route::get('/add/advance/salary', 'AddAdvanceSalary')->name('add.advance.salary');
         Route::post('/advance/salary/store','AdvanceSalaryStore')->name('advance.salary.store');
@@ -80,5 +81,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/advance/salary/update','UpdateAdvanceSalary')->name('advance.salary.update');
         Route::get('/delete/advance/salary/{id}','DeleteAdvanceSalary')->name('delete.advance.salary');
     });
+
+    /// Pay Salary All Route More actions
+    Route::controller(SalaryController::class)->group(function(){
+        Route::get('/pay/salary','PaySalary')->name('pay.salary');
+    });
+
 });
 require __DIR__ . '/auth.php';

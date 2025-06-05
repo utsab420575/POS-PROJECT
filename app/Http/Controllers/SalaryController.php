@@ -82,7 +82,7 @@ class SalaryController extends Controller
     public function UpdateAdvanceSalary(Request $request){
 
 
-        
+
         //return $request;
         $salary_id = $request->id;
 
@@ -114,6 +114,25 @@ class SalaryController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+
+
+    //////////////////////// Pay Salary All Mehtod /////////////////
+
+
+    //send month and salary also
+    public function PaySalary(Request $request){
+        $month = $request->month;
+        $year = $request->year;
+
+        $employee = [];
+
+        if ($month && $year) {
+           $employee=Employee::latest()->get();
+        }
+
+        return view('backend.salary.pay_salary', compact('employee', 'month', 'year'));
+    }// End Method
 
 
 
