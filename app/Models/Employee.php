@@ -22,7 +22,7 @@ class Employee extends Model
     {
         return $this->hasMany(AdvanceSalary::class);
     }
-    public function paySalary()
+    public function paySalaries()
     {
         return $this->hasMany(PaySalary::class);
     }
@@ -35,5 +35,13 @@ class Employee extends Model
             ->where('month', $month)
             ->where('year', $year)
             ->first();
+    }
+
+    public function hasPaidSalary($month, $year)
+    {
+        return $this->paySalaries()
+            ->where('salary_month', $month)
+            ->where('salary_year', $year)
+            ->exists();
     }
 }

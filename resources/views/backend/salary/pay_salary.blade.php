@@ -84,6 +84,9 @@
                                             $advance = $item->getAdvanceSalary($month, $year);
                                             $advanceAmount = $advance?->advance_salary ?? 0;
                                             $due = $item->salary - $advanceAmount;
+
+                                            //for check already paid or not
+                                            $alreadyPaid = $item->hasPaidSalary($month, $year);
                                         @endphp
                                         <tr>
                                             <td>{{ $key+1 }}</td>
@@ -95,8 +98,12 @@
                                             <td>{{$advanceAmount>0? $advanceAmount:'No Advance'}}</td>
                                             <td>{{$due}}</td>
                                             <td>
-                                                <a href="{{ route('pay.now.salary',$item->id) }}?month={{ $month }}&year={{ $year }}"
-                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Pay Now</a>
+                                                @if($alreadyPaid)
+                                                    <button class="btn btn-secondary rounded-pill" disabled>Already Paid</button>
+                                                @else
+                                                    <a href="{{ route('pay.now.salary', $item->id) }}?month={{ $month }}&year={{ $year }}"
+                                                       class="btn btn-blue rounded-pill waves-effect waves-light">Pay Now</a>
+                                                @endif
 
                                             </td>
                                         </tr>

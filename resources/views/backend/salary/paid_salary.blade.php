@@ -37,8 +37,10 @@
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form method="post" action="{{ route('advance.salary.store') }}" >
+                                <form method="post" action="{{ route('employee.salary.store') }}" >
                                     @csrf
+
+                                    <input type="hidden" name="id" value="{{ $single_employee->id }}">
 
                                     <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Paid Salary </h5>
 
@@ -49,6 +51,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Employee Name    </label>
                                                 <strong style="color: #fff;">{{ $single_employee->name }}</strong>
+                                                <input type="hidden" name="name" value="{{ $single_employee->name }}">
                                             </div>
                                         </div>
 
@@ -57,6 +60,8 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Salary Month    </label>
                                                 <strong style="color: #fff;">{{ $month }}-{{$year}}</strong>
+                                                <input type="hidden" name="month" value="{{ $month }}">
+                                                <input type="hidden" name="year" value="{{ $year }}">
 
                                             </div>
                                         </div>
@@ -66,7 +71,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Employe Salary    </label>
                                                 <strong style="color: #fff;">{{ $single_employee->salary }}</strong>
-
+                                                <input type="hidden" name="salary" value="{{ $single_employee->salary }}">
                                             </div>
                                         </div>
 
@@ -80,6 +85,7 @@
                                             <div class="mb-3">
                                                 <label for="firstname" class="form-label">Advnace Salary    </label>
                                                 <strong style="color: #fff;">{{ $advanceAmount }}</strong>
+                                                <input type="hidden" name="advance_salary" value="{{ $advanceAmount }}">
 
                                             </div>
                                         </div>
@@ -91,6 +97,7 @@
                                                 <strong style="color: #fff;">
                                                     {{$due}}
                                                 </strong>
+                                                <input type="hidden" name="due_salary" value="{{ $due }}">
 
                                             </div>
                                         </div>
