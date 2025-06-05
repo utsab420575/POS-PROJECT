@@ -67,4 +67,25 @@ class AttendanceController extends Controller
     }
 
 
+    public function EditEmployeeAttendence($date){
+         $employees = Employee::all();
+         //editData will be this
+        /*Collection [
+            Attendance { id: 1, employee_id: 100, date: '2025-06-05', status: 'present' },
+            Attendance { id: 2, employee_id: 101, date: '2025-06-05', status: 'leave' },
+            Attendance { id: 3, employee_id: 102, date: '2025-06-05', status: 'absent' },
+        ]*/
+         $editData = Attendance::where('date',$date)->get();
+         //attendanceData will this; so here key is employee_id
+        //$status = $attendanceData[$employee->id]->status ?? null; we can access Attendance data using employee_id
+        /*Collection [
+                100 => Attendance { id: 1, employee_id: 100, date: '2025-06-05', status: 'present' },
+                101 => Attendance { id: 2, employee_id: 101, date: '2025-06-05', status: 'leave' },
+                102 => Attendance { id: 3, employee_id: 102, date: '2025-06-05', status: 'absent' },
+        ]*/
+         $attendanceData = $editData->keyBy('employee_id');
+         return view('backend.attendance.edit_employee_attend',compact('employees','attendanceData','date'));
+
+    }// End Method
+
 }
