@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(SalaryController::class)->group(function () {
         Route::get('/add/advance/salary', 'AddAdvanceSalary')->name('add.advance.salary');
+        Route::post('/advance/salary/store','AdvanceSalaryStore')->name('advance.salary.store');
     });
 });
 require __DIR__ . '/auth.php';

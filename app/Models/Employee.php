@@ -17,4 +17,9 @@ class Employee extends Model
     //        -------
     //        ----
     //    ];
+
+    public function advanceSalaries()
+    {
+        return $this->hasMany(AdvanceSalary::class);
+    }
 }
