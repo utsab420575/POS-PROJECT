@@ -44,4 +44,8 @@ class Employee extends Model
             ->where('salary_year', $year)
             ->exists();
     }
+
+    public function attendance(){
+        return $this->hasMany(Attendance::class);
+    }
 }
