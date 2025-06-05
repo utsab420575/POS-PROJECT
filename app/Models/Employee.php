@@ -26,4 +26,14 @@ class Employee extends Model
     {
         return $this->hasMany(PaySalary::class);
     }
+
+    //finding advance salary from AdvanceSalary Table using Employee Model
+    //employee object call this method
+    public function getAdvanceSalary($month, $year)
+    {
+        return $this->advanceSalaries()
+            ->where('month', $month)
+            ->where('year', $year)
+            ->first();
+    }
 }

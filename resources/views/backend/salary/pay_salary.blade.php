@@ -75,15 +75,20 @@
                                 @if(!empty($month) && !empty($year))
                                     <tbody>
                                     @foreach($employee as $key=> $item)
+                                        @php
+                                            $advance = $item->getAdvanceSalary($month, $year);
+                                            $advanceAmount = $advance?->advance_salary ?? 0;
+                                            $due = $item->salary - $advanceAmount;
+                                        @endphp
                                         <tr>
                                             <td>{{ $key+1 }}</td>
                                             <td><img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"></td>
                                             <td>{{ $item->name }}</td>
-                                            <td><span class="badge bg-info"> {{ date("F", strtotime('-1 month')) }} </span>
+                                            <td><span class="badge bg-info"> {{ $month }} </span>
                                             </td>
                                             <td> {{ $item->salary }} </td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{$advanceAmount>0? $advanceAmount:'No Advance'}}</td>
+                                            <td>{{$due}}</td>
                                             <td>
                                                 <a href="{{ route('edit.advance.salary',$item->id) }}"
                                                    class="btn btn-blue rounded-pill waves-effect waves-light">Pay Now</a>
