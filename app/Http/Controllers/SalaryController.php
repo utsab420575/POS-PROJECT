@@ -44,7 +44,7 @@ class SalaryController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->back()->with($notification);
+            return redirect()->route('all.advance.salary')->with($notification);
 
 
         } else{
@@ -68,6 +68,52 @@ class SalaryController extends Controller
         return view('backend.salary.all_advance_salary',compact('salary'));
 
     }// End Method
+
+    //edit form show
+    public function EditAdvanceSalary($id){
+        //$employee = Employee::latest()->get();
+        $salary = AdvanceSalary::findOrFail($id);
+        $employee=$salary->employee;
+        return view('backend.salary.edit_advance_salary',compact('salary','employee'));
+
+    }// End Method
+
+
+    public function UpdateAdvanceSalary(Request $request){
+
+        //return $request;
+        $salary_id = $request->id;
+
+        AdvanceSalary::findOrFail($salary_id)->update([
+            'employee_id' => $request->employee_id,
+            'month' => $request->month,
+            'year' => $request->year,
+            'advance_salary' => $request->advance_salary,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Advance Salary Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.advance.salary')->with($notification);
+
+
+    }// End Method
+
+    public function DeleteAdvanceSalary($id){
+        AdvanceSalary::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Advance Salary Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+
 
 
 }
