@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class ProductController extends Controller
 {
@@ -198,6 +199,36 @@ class ProductController extends Controller
 
     } // End Method
 
+    //send generated bar code image to blade
+    /*public function BarcodeProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        $barcodeFile = "{$product->product_code}.png";
+        $barcodePath = public_path("barcodes/product/{$barcodeFile}");
+
+        // Create folder if needed
+        if (!file_exists(dirname($barcodePath))) {
+            mkdir(dirname($barcodePath), 0755, true);
+        }
+
+        // Generate barcode image if not already exists
+        if (!file_exists($barcodePath)) {
+            $generator = new BarcodeGeneratorPNG();
+            $barcode = $generator->getBarcode($product->product_code, $generator::TYPE_CODE_128);
+            file_put_contents($barcodePath, $barcode);
+        }
+
+        $barcodePath = asset("barcodes/product/{$barcodeFile}");
+
+        return view('backend.product.barcode_product', compact('product', 'barcodePath'));
+    }*/
+
+    //bar code will generate in blade
+    public function BarcodeProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('backend.product.barcode_product',compact('product'));
+    }
 
 
 }
