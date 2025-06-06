@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalaryController;
@@ -130,6 +131,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/import/product','ImportProduct')->name('import.product');
         Route::get('/export','Export')->name('export');
         Route::post('/import','Import')->name('import');
+    });
+
+
+
+    ///Category All Route More actions
+    Route::controller(ExpenseController::class)->group(function(){
+        Route::get('/add/expense','AddExpense')->name('add.expense');
     });
 
 
