@@ -1,4 +1,4 @@
-@extends('admin_dashboard')More actions
+@extends('admin_dashboard')
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -13,7 +13,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.product') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Download Xlsx</a>
+                                <a href="{{ route('export') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Download Xlsx</a>
 
                             </ol>
                         </div>

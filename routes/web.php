@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/product/{id}','DeleteProduct')->name('delete.product');
         Route::get('/barcode/product/{id}','BarcodeProduct')->name('barcode.product');
         Route::get('/import/product','ImportProduct')->name('import.product');
+        Route::get('/export','Export')->name('export');
     });
 
 

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class ProductController extends Controller
@@ -241,6 +243,12 @@ class ProductController extends Controller
 
     public function ImportProduct(){
         return view('backend.product.import_product');
+    }// End Method
+
+    public function Export(){
+
+        return Excel::download(new ProductsExport,'products.xlsx');
+
     }// End Method
 
 
