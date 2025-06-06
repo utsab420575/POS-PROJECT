@@ -37,7 +37,7 @@
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form id="myForm" method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                                <form id="myForm" method="post" action="{{ route('import') }}" enctype="multipart/form-data">
                                     @csrf
 
 
@@ -47,7 +47,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label">Xlsx file Import</label>
-                                                <input type="file" name="import_file" class="form-control"   >
+                                                <input type="file" name="import_file" class="form-control"  required >
 
                                             </div>
                                         </div>

@@ -12,6 +12,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductsExport;
+use App\Imports\ProductsImport;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class ProductController extends Controller
@@ -250,6 +251,30 @@ class ProductController extends Controller
         return Excel::download(new ProductsExport,'products.xlsx');
 
     }// End Method
+
+    public function Import(Request $request)
+    {
+        $request->validate([
+            'import_file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        try {
+            Excel::import(new ProductsImport, $request->file('import_file'));
+        } catch (\Exception $e) {
+            $notification = [
+                'message' => 'Import failed: ' . $e->getMessage(),
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+
+        $notification = [
+            'message' => 'Products Imported Successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('all.product')->with($notification);
+    }
 
 
 }
