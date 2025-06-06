@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Supplier;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -30,7 +31,6 @@ class ProductController extends Controller
             'product_name'   => 'required|string|max:255',
             'category_id'    => 'required|exists:categories,id',
             'supplier_id'    => 'required|exists:suppliers,id',
-            'product_code'   => 'required|string|max:100|unique:products,product_code',
             'buying_date'    => 'required|date',
             'expire_date'    => 'required|date|after_or_equal:buying_date',
             'buying_price'   => 'required|numeric|min:0',
@@ -59,12 +59,21 @@ class ProductController extends Controller
         $image->save($path . $name_gen);
         $save_url = 'upload/product/'.$name_gen;
 
+        //product code
+
+        $pcode = IdGenerator::generate([
+            'table' => 'products',
+            'field' => 'product_code',
+            'length' => 5,
+            'prefix' => 'PC-'
+        ]);
+
         Product::create([
 
             'product_name' => $request->product_name,
             'category_id' => $request->category_id,
             'supplier_id' => $request->supplier_id,
-            'product_code' => $request->product_code,
+            'product_code' => $pcode,
             'product_garage' => $request->product_garage,
             'product_store' => $request->product_store,
             'buying_date' => $request->buying_date,

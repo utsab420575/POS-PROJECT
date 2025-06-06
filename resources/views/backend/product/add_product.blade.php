@@ -67,14 +67,14 @@
                                             </div>
                                         </div>
 
-                                        <!-- Product Code -->
+                                        {{--<!-- Product Code -->
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Product Code</label>
                                                 <input type="text" name="product_code" class="form-control" required value="{{ old('product_code') }}">
                                                 @error('product_code') <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
-                                        </div>
+                                        </div>--}}
 
                                         <!-- Product Garage -->
                                         <div class="col-md-6">

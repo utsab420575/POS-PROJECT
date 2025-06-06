@@ -72,7 +72,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Product Code</label>
-                                                <input type="text" name="product_code" class="form-control" required value="{{ $product->product_code }}">
+                                                <input type="text" name="product_code" class="form-control" required value="{{ $product->product_code }}" readonly>
                                                 @error('product_code') <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                         </div>
