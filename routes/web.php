@@ -5,6 +5,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SupplierController;
@@ -114,6 +115,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/category/{id}','DeleteCategory')->name('delete.category');
 
     });
+
+
+
+    //Product All Route
+    Route::controller(ProductController::class)->group(function(){
+
+        Route::get('/all/product','AllProduct')->name('all.product');
+
+    });
+
+
+
+
 
 });
 require __DIR__ . '/auth.php';
