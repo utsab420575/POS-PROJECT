@@ -202,7 +202,7 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarAuth">
-                        <ul class="nav-second-level">More actions
+                        <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('add.expense') }}">Add Expense</a>
                             </li>
