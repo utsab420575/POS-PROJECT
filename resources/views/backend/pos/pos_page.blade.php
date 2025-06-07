@@ -1,4 +1,4 @@
-@extends('admin_dashboard')More actions
+@extends('admin_dashboard')
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
@@ -114,17 +114,18 @@
                                     </thead>
 
 
+
                                     <tbody>
                                     @foreach($product as $key=> $item)
                                         <tr>
-                                            <td>{{ $key+1 }}</td>
-                                            <td><img src="{{ asset($item->product_image) }}"
-                                                     style="width:50px; height: 40px;"></td>
-                                            <td>{{ $item->product_name }}</td>
-                                            <td>
-                                                <button type="submit" style="font-size: 20px; color: #000;"><i
-                                                        class="fas fa-plus-square"></i></button>
-                                            </td>
+                                                <td>{{ $key+1 }}</td>
+                                                <td><img src="{{ asset($item->product_image) }}"
+                                                         style="width:50px; height: 40px;"></td>
+                                                <td>{{ $item->product_name }}</td>
+                                                <td>
+                                                    <button type="submit" style="font-size: 20px; color: #000;"><i
+                                                            class="fas fa-plus-square"></i></button>
+                                                </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
