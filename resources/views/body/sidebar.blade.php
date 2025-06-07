@@ -62,6 +62,14 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('own.pos') }}">
+                        <span class="badge bg-pink float-end">own pos</span>
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span>Own POS </span>
+                    </a>
+                </li>
+
                 <li class="menu-title mt-2">Apps</li>
 
                 <li>

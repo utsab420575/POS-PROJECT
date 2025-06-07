@@ -161,7 +161,19 @@ Route::middleware('auth')->group(function () {
     });
 
 
+    // POS with own made cart (prefix: own)
+    Route::prefix('own')->controller(PosController::class)->group(function () {
+        Route::get('/pos', 'OwnPos')->name('own.pos');
+        Route::post('/add-cart', 'OwnAddCart')->name('own.add.cart');
+        Route::post('/cart-update/{productId}', 'OwnCartUpdate')->name('own.cart.update');
+        Route::get('/cart-remove/{productId}', 'OwnCartRemove')->name('own.cart.remove');
 
+
+        //this route for testing ; showing cart items
+        Route::get('/allitem','OwnAllItem');
+        //for destroy cart item
+        Route::get('/cart-destroy', 'OwnDestroyCart')->name('own.cart.destroy');
+    });
 
 
 });
