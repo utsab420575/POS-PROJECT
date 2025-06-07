@@ -118,6 +118,13 @@
                                     <tbody>
                                     @foreach($product as $key=> $item)
                                         <tr>
+                                            <form method="post" action="{{ url('/add-cart') }}">More actions
+                                                @csrf
+
+                                                <input type="hidden" name="id" value="{{ $item->id }}">
+                                                <input type="hidden" name="name" value="{{ $item->product_name }}">
+                                                <input type="hidden" name="qty" value="1">
+                                                <input type="hidden" name="price" value="{{ $item->selling_price }}">
                                                 <td>{{ $key+1 }}</td>
                                                 <td><img src="{{ asset($item->product_image) }}"
                                                          style="width:50px; height: 40px;"></td>
@@ -126,6 +133,7 @@
                                                     <button type="submit" style="font-size: 20px; color: #000;"><i
                                                             class="fas fa-plus-square"></i></button>
                                                 </td>
+                                            </form>
                                         </tr>
                                     @endforeach
                                     </tbody>
