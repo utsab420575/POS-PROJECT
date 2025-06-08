@@ -79,13 +79,13 @@
                             </div>
 
                             <!-- Invoice -->
-                            <form method="POST" action="">
+                            <form method="post" action="{{ url('/own/create-invoice') }}">
                                 @csrf
                                 <div class="form-group mb-3 mt-3">
                                     <label for="customer_id">All Customers</label>
                                     <a href="{{ route('add.customer') }}" class="btn btn-primary btn-sm mb-2 float-end">Add Customer</a>
                                     <select name="customer_id" class="form-select" required>
-                                        <option selected disabled>Select Customer</option>
+                                        <option value="" selected disabled>Select Customer</option>
                                         @foreach($customer as $cus)
                                             <option value="{{ $cus->id }}">{{ $cus->name }}</option>
                                         @endforeach

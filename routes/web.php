@@ -173,6 +173,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/allitem','OwnAllItem');
         //for destroy cart item
         Route::get('/cart-destroy', 'OwnDestroyCart')->name('own.cart.destroy');
+
+
+
+        Route::post('/create-invoice','CreateInvoice');
+
     });
 
 
