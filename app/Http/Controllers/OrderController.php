@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -24,41 +27,68 @@ class OrderController extends Controller
             'due'             => 'required|numeric',
         ]);
 
-        // 2. Insert into `orders` table
-        $order = Order::create([
-            'customer_id'     => $request->customer_id,
-            'order_date'      => date('Y-m-d', strtotime($request->order_date)),
-            'order_status'    => $request->order_status,
-            'total_products'  => $request->total_products,
-            'sub_total'       => $request->sub_total,
-            'vat'             => $request->vat,
-            'total'           => $request->total,
-            'payment_status'  => $request->payment_status,
-            'pay'             => $request->pay,
-            'due'             => $request->due,
-            'invoice_no'      => 'EPOS' . mt_rand(10000000, 99999999),
-            'created_at'      => Carbon::now(),
-        ]);
+        DB::beginTransaction(); // 🔁 Start transaction
 
-        // 3. Get all cart items from session
-        $contents = session()->get('own_cart', []);
+        try {
+            // 2. Insert into `orders` table
+            $order = Order::create([
+                'customer_id'     => $request->customer_id,
+                'order_date'      => date('Y-m-d', strtotime($request->order_date)),
+                'order_status'    => $request->order_status,
+                'total_products'  => $request->total_products,
+                'sub_total'       => $request->sub_total,
+                'vat'             => $request->vat,
+                'total'           => $request->total,
+                'payment_status'  => $request->payment_status,
+                'pay'             => $request->pay,
+                'due'             => $request->due,
+                'invoice_no'      => 'EPOS' . mt_rand(10000000, 99999999),
+                'created_at'      => Carbon::now(),
+            ]);
 
-        // 4. Save each item to `order_details` table
-        foreach ($contents as $item) {
-            OrderDetail::create([
-                'order_id'   => $order->id,//this id generate in  $order automatically
-                'product_id' => $item['id'],
-                'quantity'   => $item['qty'],
-                'unitcost'   => $item['price'],
-                'total'      => $item['subtotal'],
+            // 3. Get all cart items from session
+            $contents = session()->get('own_cart', []);
+
+            // 4. Save each item to `order_details` table
+            foreach ($contents as $item) {
+                OrderDetail::create([
+                    'order_id'   => $order->id,
+                    'product_id' => $item['id'],
+                    'quantity'   => $item['qty'],
+                    'unitcost'   => $item['price'],
+                    'total'      => $item['subtotal'],
+                ]);
+            }
+
+            // 5. Clear cart from session
+            session()->forget('own_cart');
+
+            DB::commit(); // ✅ Commit transaction
+
+            // 6. Redirect with success message
+            return redirect()->route('dashboard')->with([
+                'message' => 'Order Complete Successfully',
+                'alert-type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack(); // ❌ Rollback on error
+
+            // Optional: Log the error
+            \Log::error('Order Processing Failed: ' . $e->getMessage());
+
+            return redirect()->back()->with([
+                'message' => 'Something went wrong. Please try again.',
+                'alert-type' => 'error'
             ]);
         }
-
-        // 5. Clear cart from session
-        session()->forget('own_cart');
-
-        // 6. Redirect with success message
-        return redirect()->route('orders.all')->with('success', 'Order completed successfully!');
     }
+
+
+    public function PendingOrder(){
+        //Provide Array of Objects (Eloquent Collection)
+        $orders = Order::where('order_status','pending')->get();
+        //return $orders;
+        return view('backend.order.pending_order',compact('orders'));
+    }// End Method
 
 }
