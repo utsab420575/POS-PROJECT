@@ -222,7 +222,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('add.product') }}">Complete Orders </a>
+                                <a href="{{ route('complete.order') }}">Complete Orders </a>
                             </li>
 
 
