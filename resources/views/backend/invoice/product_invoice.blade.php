@@ -141,7 +141,7 @@
                                 <div class="col-sm-6">
                                     <div class="float-end">
                                         <p><b>Sub-total:</b> <span class="float-end">${{ number_format($subTotal, 2) }}</span></p>
-                                        <p><b>Discount (5%):</b> <span
+                                        <p><b>VAT (5%):</b> <span
                                                 class="float-end"> &nbsp;&nbsp;&nbsp; ${{ number_format($subTotal * 0.05, 2) }}</span></p>
                                         <h3>${{ number_format($subTotal * 1.05, 2) }}</h3>
                                     </div>
@@ -155,7 +155,8 @@
                                     <a href="javascript:window.print()"
                                        class="btn btn-primary waves-effect waves-light"><i
                                             class="mdi mdi-printer me-1"></i> Print</a>
-                                    <a href="#" class="btn btn-info waves-effect waves-light">Submit</a>
+                                    {{--Modal button--}}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">Create Invoice </button>
                                 </div>
                             </div>
                         </div>
@@ -167,5 +168,61 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
+
+
+
+    <!-- Signup modal content -->
+    <div id="signup-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="text-center mt-2 mb-4 ">
+                        <div class="auth-logo">
+                            <h3>Invoice Of {{ $customer->name }}</h3>
+                            <h3>Total Amount  ${{ number_format($subTotal * 1.05, 2) }}</h3>
+                        </div>
+                    </div>
+
+
+
+
+                    <form class="px-3" method="post" action="">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Payment</label>
+                            <select name="customer_id" class="form-select" id="example-select">
+                                <option selected disabled >Select Payment </option>
+
+                                <option value="HandCash">HandCash</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="Due">Due</option>
+
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Pay Now</label>
+                            <input class="form-control" type="text" name="category_name" placeholder="Pay Now">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Due Amount</label>
+                            <input class="form-control" type="text" name="category_name" placeholder="Due Amount ">
+                        </div>
+
+
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-primary" type="submit">Complete Order </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 @endsection
