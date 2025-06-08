@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class OrderController extends Controller
@@ -170,6 +171,7 @@ class OrderController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
+        Log::info('OrderItem', $orderItem->toArray());
         // Generate PDF using the view
         $pdf = Pdf::loadView('backend.order.order_invoice', compact('order', 'orderItem'))
             ->setPaper('a4');
