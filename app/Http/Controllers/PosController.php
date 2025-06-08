@@ -192,11 +192,40 @@ class PosController extends Controller
     /////////////////////////////////////invoice////////////////////////////////////////
     public function CreateInvoice(Request $request)
     {
+
+        /*{
+            "12": {
+                    "id": "12",
+                "name": "Mouse",
+                "qty": "3",
+                "price": "684",
+                "subtotal": 2052
+            },
+            "11": {
+                    "id": "11",
+                "name": "Computer",
+                "qty": "1",
+                "price": "684",
+                "subtotal": 684
+            }
+        }*/
         //get all cart value
         $contents = session()->get('own_cart', []);
+        $subTotal = 0;
+        $totalProducts = 0;
+
+        foreach ($contents as $item) {
+            $subTotal += $item['subtotal'];  // use 'subtotal' directly
+            $totalProducts += $item['qty'];  // make sure qty is integer
+        }
+
+        $vat = $subTotal * 0.05;
+        $total = $subTotal + $vat;
+
+
         $cust_id = $request->customer_id;
         $customer = Customer::where('id', $cust_id)->first();
-        return view('backend.invoice.product_invoice', compact('contents', 'customer'));
+        return view('backend.invoice.product_invoice', compact('contents', 'customer', 'totalProducts', 'subTotal', 'vat', 'total'));
 
     } // End Method
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -179,6 +180,16 @@ Route::middleware('auth')->group(function () {
         Route::post('/create-invoice','CreateInvoice');
 
     });
+
+
+    ///Order All Route More actions
+    Route::controller(OrderController::class)->group(function(){
+
+        Route::post('/final-invoice','FinalInvoice');
+
+
+    });
+
 
 
 });

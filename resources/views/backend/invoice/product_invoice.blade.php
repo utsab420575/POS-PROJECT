@@ -187,12 +187,12 @@
 
 
 
-                    <form class="px-3" method="post" action="">
+                    <form class="px-3" method="post" action="{{ url('/final-invoice') }}">
                         @csrf
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">Payment</label>
-                            <select name="customer_id" class="form-select" id="example-select">
+                            <label for="payment_status" class="form-label">Payment</label>
+                            <select name="payment_status" class="form-select" id="example-select">
                                 <option selected disabled >Select Payment </option>
 
                                 <option value="HandCash">HandCash</option>
@@ -203,15 +203,24 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">Pay Now</label>
-                            <input class="form-control" type="text" name="category_name" placeholder="Pay Now">
+                            <label for="pay" class="form-label">Pay Now</label>
+                            <input class="form-control" name="pay" type="text" placeholder="Pay Now">
                         </div>
 
 
                         <div class="mb-3">
-                            <label for="username" class="form-label">Due Amount</label>
-                            <input class="form-control" type="text" name="category_name" placeholder="Due Amount ">
+                            <label for="due" class="form-label">Due Amount</label>
+                            <input class="form-control" name="due" type="text"  placeholder="Due Amount ">
                         </div>
+
+
+                        <input type="hidden" name="customer_id" value="{{ $customer->id }}">
+                        <input type="hidden" name="order_date" value="{{ date('d-F-Y') }}">
+                        <input type="hidden" name="order_status" value="pending">
+                        <input type="hidden" name="total_products" value="{{ $totalProducts }}">
+                        <input type="hidden" name="sub_total" value="{{ number_format($subTotal, 2, '.', '') }}">
+                        <input type="hidden" name="vat" value="{{ number_format($vat, 2, '.', '') }}">
+                        <input type="hidden" name="total" value="{{ number_format($total, 2, '.', '') }}">
 
 
                         <div class="mb-3 text-center">
