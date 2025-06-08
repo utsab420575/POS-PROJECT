@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -115,7 +116,20 @@ class OrderController extends Controller
 
         $order_id = $request->id;
 
+        // 1. Update order status
         Order::findOrFail($order_id)->update(['order_status' => 'complete']);
+
+        // 2. Get all related OrderDetails
+        $orderItems = OrderDetail::where('order_id', $order_id)->get();
+
+        // 3. Loop through each item and reduce product stock
+        foreach ($orderItems as $item) {
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->product_store = $product->product_store - $item->quantity;
+                $product->save();
+            }
+        }
 
         $notification = array(
             'message' => 'Order Done Successfully',
@@ -132,6 +146,13 @@ class OrderController extends Controller
 
         $orders = Order::where('order_status','complete')->get();
         return view('backend.order.complete_order',compact('orders'));
+
+    }// End Method
+
+    public function StockManage(){
+
+    $product = Product::latest()->get();
+    return view('backend.stock.all_stock',compact('product'));
 
     }// End Method
 
