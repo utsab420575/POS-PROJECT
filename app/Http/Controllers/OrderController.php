@@ -6,9 +6,11 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+
 
 class OrderController extends Controller
 {
@@ -155,6 +157,34 @@ class OrderController extends Controller
     return view('backend.stock.all_stock',compact('product'));
 
     }// End Method
+
+
+    public function OrderInvoice($order_id)
+    {
+        // Fetch the order with details
+        $order = Order::findOrFail($order_id);
+
+        // Fetch order items along with product information
+        $orderItem = OrderDetail::with('product')
+            ->where('order_id', $order_id)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        // Generate PDF using the view
+        $pdf = Pdf::loadView('backend.order.order_invoice', compact('order', 'orderItem'))
+            ->setPaper('a4');
+
+        // Optional: Set options (only if needed for file path issues)
+        // DOMPDF uses these if your view includes images or fonts from `public/`
+        $pdf->setOptions([
+            'tempDir' => public_path(),
+            'chroot'  => public_path(),
+        ]);
+
+        // Download the PDF
+        return $pdf->download('invoice.pdf');
+    }
+
 
 
 }
