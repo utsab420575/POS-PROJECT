@@ -4,10 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class OrderController extends Controller
 {
-    public function FinalInvoice(Request $request){
+    public function FinalInvoice(Request $request)
+    {
+        // 1. Validate incoming request
+        $request->validate([
+            'customer_id'     => 'required|exists:customers,id',
+            'order_date'      => 'required|date',
+            'order_status'    => 'required|string',
+            'total_products'  => 'required|integer',
+            'sub_total'       => 'required|numeric',
+            'vat'             => 'required|numeric',
+            'total'           => 'required|numeric',
+            'payment_status'  => 'required|string',
+            'pay'             => 'required|numeric',
+            'due'             => 'required|numeric',
+        ]);
 
-    } // End Method
+        // 2. Insert into `orders` table
+        $order = Order::create([
+            'customer_id'     => $request->customer_id,
+            'order_date'      => date('Y-m-d', strtotime($request->order_date)),
+            'order_status'    => $request->order_status,
+            'total_products'  => $request->total_products,
+            'sub_total'       => $request->sub_total,
+            'vat'             => $request->vat,
+            'total'           => $request->total,
+            'payment_status'  => $request->payment_status,
+            'pay'             => $request->pay,
+            'due'             => $request->due,
+            'invoice_no'      => 'EPOS' . mt_rand(10000000, 99999999),
+            'created_at'      => Carbon::now(),
+        ]);
+
+        // 3. Get all cart items from session
+        $contents = session()->get('own_cart', []);
+
+        // 4. Save each item to `order_details` table
+        foreach ($contents as $item) {
+            OrderDetail::create([
+                'order_id'   => $order->id,//this id generate in  $order automatically
+                'product_id' => $item['id'],
+                'quantity'   => $item['qty'],
+                'unitcost'   => $item['price'],
+                'total'      => $item['subtotal'],
+            ]);
+        }
+
+        // 5. Clear cart from session
+        session()->forget('own_cart');
+
+        // 6. Redirect with success message
+        return redirect()->route('orders.all')->with('success', 'Order completed successfully!');
+    }
+
 }
