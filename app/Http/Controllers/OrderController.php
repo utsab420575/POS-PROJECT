@@ -91,4 +91,15 @@ class OrderController extends Controller
         return view('backend.order.pending_order',compact('orders'));
     }// End Method
 
+
+    public function OrderDetails($order_id){
+
+        $order = Order::where('id',$order_id)->first();
+
+        $orderItem = OrderDetail::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
+        //return $orderItem;
+        return view('backend.order.order_details',compact('order','orderItem'));
+
+    }// End Method
+
 }
