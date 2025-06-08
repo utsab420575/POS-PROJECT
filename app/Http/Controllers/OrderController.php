@@ -15,16 +15,16 @@ class OrderController extends Controller
     {
         // 1. Validate incoming request
         $request->validate([
-            'customer_id'     => 'required|exists:customers,id',
-            'order_date'      => 'required|date',
-            'order_status'    => 'required|string',
-            'total_products'  => 'required|integer',
-            'sub_total'       => 'required|numeric',
-            'vat'             => 'required|numeric',
-            'total'           => 'required|numeric',
-            'payment_status'  => 'required|string',
-            'pay'             => 'required|numeric',
-            'due'             => 'required|numeric',
+            'customer_id' => 'required|exists:customers,id',
+            'order_date' => 'required|date',
+            'order_status' => 'required|string',
+            'total_products' => 'required|integer',
+            'sub_total' => 'required|numeric',
+            'vat' => 'required|numeric',
+            'total' => 'required|numeric',
+            'payment_status' => 'required|string',
+            'pay' => 'required|numeric',
+            'due' => 'required|numeric',
         ]);
 
         DB::beginTransaction(); // 🔁 Start transaction
@@ -32,18 +32,18 @@ class OrderController extends Controller
         try {
             // 2. Insert into `orders` table
             $order = Order::create([
-                'customer_id'     => $request->customer_id,
-                'order_date'      => date('Y-m-d', strtotime($request->order_date)),
-                'order_status'    => $request->order_status,
-                'total_products'  => $request->total_products,
-                'sub_total'       => $request->sub_total,
-                'vat'             => $request->vat,
-                'total'           => $request->total,
-                'payment_status'  => $request->payment_status,
-                'pay'             => $request->pay,
-                'due'             => $request->due,
-                'invoice_no'      => 'EPOS' . mt_rand(10000000, 99999999),
-                'created_at'      => Carbon::now(),
+                'customer_id' => $request->customer_id,
+                'order_date' => date('Y-m-d', strtotime($request->order_date)),
+                'order_status' => $request->order_status,
+                'total_products' => $request->total_products,
+                'sub_total' => $request->sub_total,
+                'vat' => $request->vat,
+                'total' => $request->total,
+                'payment_status' => $request->payment_status,
+                'pay' => $request->pay,
+                'due' => $request->due,
+                'invoice_no' => 'EPOS' . mt_rand(10000000, 99999999),
+                'created_at' => Carbon::now(),
             ]);
 
             // 3. Get all cart items from session
@@ -51,12 +51,16 @@ class OrderController extends Controller
 
             // 4. Save each item to `order_details` table
             foreach ($contents as $item) {
+                $subtotal = $item['subtotal'];
+                $vatAmount = $subtotal * 0.05;
+                $totalWithVat = $subtotal + $vatAmount;
                 OrderDetail::create([
-                    'order_id'   => $order->id,
+                    'order_id' => $order->id,
                     'product_id' => $item['id'],
-                    'quantity'   => $item['qty'],
-                    'unitcost'   => $item['price'],
-                    'total'      => $item['subtotal'],
+                    'quantity' => $item['qty'],
+                    'unitcost' => $item['price'],
+                    'vat' => $vatAmount,
+                    'total' => $totalWithVat,
                 ]);
             }
 
@@ -84,22 +88,44 @@ class OrderController extends Controller
     }
 
 
-    public function PendingOrder(){
+    public function PendingOrder()
+    {
         //Provide Array of Objects (Eloquent Collection)
-        $orders = Order::where('order_status','pending')->get();
+        $orders = Order::where('order_status', 'pending')->get();
         //return $orders;
-        return view('backend.order.pending_order',compact('orders'));
+        return view('backend.order.pending_order', compact('orders'));
     }// End Method
 
 
-    public function OrderDetails($order_id){
+    public function OrderDetails($order_id)
+    {
 
-        $order = Order::where('id',$order_id)->first();
+        $order = Order::where('id', $order_id)->first();
 
-        $orderItem = OrderDetail::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
+        //$orderItem = OrderDetail::with('product')->where('order_id',$order_id)->orderBy('id','DESC')->get();
+        $orderItem = OrderDetail::where('order_id', $order_id)->orderBy('id', 'DESC')->get();
         //return $orderItem;
-        return view('backend.order.order_details',compact('order','orderItem'));
+        return view('backend.order.order_details', compact('order', 'orderItem'));
 
     }// End Method
+
+
+    public function OrderStatusUpdate(Request $request)
+    {
+
+        $order_id = $request->id;
+
+        Order::findOrFail($order_id)->update(['order_status' => 'complete']);
+
+        $notification = array(
+            'message' => 'Order Done Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('pending.order')->with($notification);
+
+
+    }// End Method
+
 
 }
