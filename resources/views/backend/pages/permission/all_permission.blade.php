@@ -45,8 +45,8 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->group_name }}</td>
                                         <td>
-                                            <a href="{{ route('customer.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('customer.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            <a href="{{ route('permission.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{ route('permission.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
 
                                         </td>
                                     </tr>
@@ -64,7 +64,6 @@
 
 
         </div> <!-- container -->
-        More actions
     </div> <!-- content -->
 
 

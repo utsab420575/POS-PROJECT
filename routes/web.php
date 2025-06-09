@@ -172,6 +172,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/all', 'AllPermission')->name('permission.all');
         Route::get('/permission/add', 'AddPermission')->name('permission.add');
         Route::post('/permission/store', 'StorePermission')->name('permission.store');
+
+        Route::get('/permission/edit/{id}','EditPermission')->name('permission.edit');
+        Route::post('/permission/update','UpdatePermission')->name('permission.update');
+        Route::get('/permission/delete/{id}','DeletePermission')->name('permission.delete');
     });
 });
 
