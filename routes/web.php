@@ -184,6 +184,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/roles/edit/{id}', 'EditRoles')->name('roles.edit');
         Route::post('/roles/update', 'UpdateRoles')->name('roles.update');
         Route::get('/roles/delete/{id}', 'DeleteRoles')->name('roles.delete');
+
+
+        ///Add Roles in Permission All Route (Assign Permission(Route) In Roles)
+        /// Here We select Which Role Can Access Which Permission
+        Route::get('/roles/permissions/add', 'AddRolesPermission')->name('roles.permissions.add');
+
+
+
     });
 });
 
