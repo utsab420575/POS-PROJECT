@@ -61,11 +61,12 @@
                                                     <option selected disabled >Select Group  </option>
 
                                                     <option value="pos"> Pos</option>
+                                                    <option value="own_pos"> Own Pos</option>
                                                     <option value="employee"> Employee</option>
                                                     <option value="customer"> Customer</option>
                                                     <option value="supplier"> Supplier</option>
-                                                    <option value="salary"> Salary </option>
-                                                    <option value="attendence"> Attendence </option>
+                                                    <option value="employee_salary"> Employee Salary </option>
+                                                    <option value="employee_attendence"> Employee Attendance </option>
                                                     <option value="category"> Category </option>
                                                     <option value="product"> Product </option>
                                                     <option value="expense"> Expense </option>
