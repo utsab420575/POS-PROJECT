@@ -89,7 +89,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/advance/salary/{id}','DeleteAdvanceSalary')->name('delete.advance.salary');
     });
 
-    /// Pay Salary All Route More actions
+    /// Pay Salary All Route
     Route::controller(SalaryController::class)->group(function(){
         Route::get('/pay/salary','PaySalary')->name('pay.salary');
         Route::get('/pay/now/salary/{id}','PayNowSalary')->name('pay.now.salary');
@@ -199,7 +199,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(RoleController::class)->group(function(){
 
         Route::get('/all/permission','AllPermission')->name('all.permission');
-
+        Route::get('/add/permission','AddPermission')->name('add.permission');
+        Route::post('/store/permission','StorePermission')->name('permission.store');
 
     });
 
