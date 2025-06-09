@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
@@ -191,6 +192,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/complete/order','CompleteOrder')->name('complete.order');
         Route::get('/stock','StockManage')->name('stock.manage');
         Route::get('/order/invoice-download/{order_id}','OrderInvoice');
+    });
+
+
+    ///Permission All Route More actions
+    Route::controller(RoleController::class)->group(function(){
+
+        Route::get('/all/permission','AllPermission')->name('all.permission');
+
+
     });
 
 
