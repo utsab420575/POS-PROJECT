@@ -77,7 +77,7 @@ class EmployeeController extends Controller
              'alert-type' => 'success'
          );
 
-        return redirect()->route('all.employee')->with($notification);
+        return redirect()->route('employee.all')->with($notification);
     } // End Method
 
 
@@ -133,7 +133,7 @@ class EmployeeController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.employee')->with($notification);
+            return redirect()->route('employee.all')->with($notification);
 
         } else{
 
@@ -156,7 +156,7 @@ class EmployeeController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.employee')->with($notification);
+            return redirect()->route('employee.all')->with($notification);
 
         } // End else Condition
 

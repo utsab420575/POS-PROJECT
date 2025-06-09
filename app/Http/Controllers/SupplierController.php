@@ -78,7 +78,7 @@ class SupplierController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.supplier')->with($notification);
+        return redirect()->route('supplier.all')->with($notification);
     } // End Method
 
 
@@ -139,7 +139,7 @@ class SupplierController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.supplier')->with($notification);
+            return redirect()->route('supplier.all')->with($notification);
 
         } else{
 
@@ -165,7 +165,7 @@ class SupplierController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.supplier')->with($notification);
+            return redirect()->route('supplier.all')->with($notification);
 
         } // End else Condition
 

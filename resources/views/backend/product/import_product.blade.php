@@ -13,7 +13,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('export') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Download Xlsx</a>
+                                <a href="{{ route('product.export') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Download Xlsx</a>
 
                             </ol>
                         </div>
@@ -37,7 +37,7 @@
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form id="myForm" method="post" action="{{ route('import') }}" enctype="multipart/form-data">
+                                <form id="myForm" method="post" action="{{ route('product.import') }}" enctype="multipart/form-data">
                                     @csrf
 
 

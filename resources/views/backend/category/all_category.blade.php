@@ -41,8 +41,8 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $item->category_name }}</td>
                                         <td>
-                                            <a href="{{ route('edit.category',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('delete.category',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            <a href="{{ route('category.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{ route('category.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
 
                                         </td>
                                     </tr>

@@ -48,7 +48,7 @@
                                             <tr>
                                                 <td>{{ $item['name'] }}</td>
                                                 <td>
-                                                    <form method="POST" action="{{ route('own.cart.update', $productId) }}">
+                                                    <form method="POST" action="{{ route('own.pos.cart.update', $productId) }}">
                                                         @csrf
                                                         <input type="number" name="qty" value="{{ $item['qty'] }}" style="width: 50px;" min="1">
                                                         <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-check"></i></button>
@@ -57,7 +57,7 @@
                                                 <td>{{ $item['price'] }}</td>
                                                 <td>{{ $subTotal }}</td>
                                                 <td>
-                                                    <a href="{{ route('own.cart.remove', $productId) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                    <a href="{{ route('own.pos.cart.remove', $productId) }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -79,11 +79,11 @@
                             </div>
 
                             <!-- Invoice -->
-                            <form method="post" action="{{ url('/own/create-invoice') }}">
+                            <form method="post" action="{{ route('own.pos.invoice.create') }}">
                                 @csrf
                                 <div class="form-group mb-3 mt-3">
                                     <label for="customer_id">All Customers</label>
-                                    <a href="{{ route('add.customer') }}" class="btn btn-primary btn-sm mb-2 float-end">Add Customer</a>
+                                    <a href="{{ route('customer.add') }}" class="btn btn-primary btn-sm mb-2 float-end">Add Customer</a>
                                     <select name="customer_id" class="form-select" required>
                                         <option value="" selected disabled>Select Customer</option>
                                         @foreach($customer as $cus)
@@ -113,7 +113,7 @@
                                 <tbody>
                                 @foreach($product as $key => $item)
                                     <tr>
-                                        <form method="POST" action="{{ route('own.add.cart') }}">
+                                        <form method="POST" action="{{ route('own.pos.cart.add') }}">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                             <input type="hidden" name="name" value="{{ $item->product_name }}">

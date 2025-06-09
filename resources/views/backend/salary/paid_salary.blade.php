@@ -37,7 +37,7 @@
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form method="post" action="{{ route('employee.salary.store') }}" >
+                                <form method="post" action="{{ route('employee.salary.pay.store') }}" >
                                     @csrf
 
                                     <input type="hidden" name="id" value="{{ $single_employee->id }}">

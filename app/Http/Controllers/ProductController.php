@@ -93,7 +93,7 @@ class ProductController extends Controller
              'alert-type' => 'success'
          );
 
-        return redirect()->route('all.product')->with($notification);
+        return redirect()->route('product.all')->with($notification);
     }
 
 
@@ -162,7 +162,7 @@ class ProductController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.product')->with($notification);
+            return redirect()->route('product.all')->with($notification);
 
         } else{
 
@@ -187,7 +187,7 @@ class ProductController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.product')->with($notification);
+            return redirect()->route('product.all')->with($notification);
 
         } // End else Condition
 
@@ -273,7 +273,7 @@ class ProductController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('all.product')->with($notification);
+        return redirect()->route('product.all')->with($notification);
     }
 
 

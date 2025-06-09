@@ -187,7 +187,7 @@
 
 
 
-                    <form class="px-3" method="post" action="{{ url('/final-invoice') }}">
+                    <form class="px-3" method="post" action="{{ route('order.invoice.final') }}">
                         @csrf
 
                         <div class="mb-3">

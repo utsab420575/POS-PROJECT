@@ -12,7 +12,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{route('add.employee')}}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Employee </a>
+                                <a href="{{route('employee.add')}}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Employee </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Employee</h4>
@@ -50,8 +50,8 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->salary }}</td>
                                         <td>
-                                            <a href="{{route('edit.employee',$item->id)}}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{route('delete.employee',$item->id)}}" id="delete" class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
+                                            <a href="{{route('employee.edit',$item->id)}}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{route('employee.delete',$item->id)}}" id="delete" class="btn btn-danger rounded-pill waves-effect waves-light">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

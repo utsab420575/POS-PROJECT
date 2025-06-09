@@ -12,7 +12,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.supplier') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Supplier </a>
+                                <a href="{{ route('supplier.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Supplier </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Supplier</h4>
@@ -51,9 +51,9 @@
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->type }}</td>
                                         <td>
-                                            <a href="{{ route('edit.supplier',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                            <a href="{{ route('delete.supplier',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            <a href="{{ route('details.supplier',$item->id) }}" class="btn btn-info rounded-pill waves-effect waves-light" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            <a href="{{ route('supplier.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <a href="{{ route('supplier.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <a href="{{ route('supplier.details',$item->id) }}" class="btn btn-info rounded-pill waves-effect waves-light" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

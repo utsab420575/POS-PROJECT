@@ -31,7 +31,7 @@
                         <div class="card-body">
 
                             <div class="tab-pane" id="settings">
-                                <form method="post" action="{{ route('update.password') }}">
+                                <form method="post" action="{{ route('admin.password.change') }}">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">

@@ -12,7 +12,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.expense') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Expense </a>
+                                <a href="{{ route('expense.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Expense </a>
                             </ol>
                         </div>
                         <h4 class="page-title">Today Expense</h4>
@@ -59,7 +59,7 @@
                                         <td>{{ $item->month }}</td>
                                         <td>{{ $item->year }}</td>
                                         <td>
-                                            <a href="{{ route('edit.expense',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{ route('expense.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
 
                                         </td>
                                     </tr>

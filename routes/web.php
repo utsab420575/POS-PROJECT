@@ -29,184 +29,150 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-//for logout ;
+// Admin Routes
 Route::get('admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
-
-
-// Route to show logout success message/page
 Route::get('/logout-success', [AdminController::class, 'AdminLogoutPage'])->name('logout.success');
 
-
 Route::middleware('auth')->group(function () {
+
+    // Admin profile and password
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
-    Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('change.password');
-    Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('update.password');
+    Route::get('/change/password', [AdminController::class, 'ChangePassword'])->name('admin.password.change');
+    Route::post('/update/password', [AdminController::class, 'UpdatePassword'])->name('admin.password.update');
 
-
-    //all route should be use auth middleware
+    // Employee
     Route::controller(EmployeeController::class)->group(function () {
-        Route::get('/all/employee', 'AllEmployee')->name('all.employee');
-        Route::get('/add/employee', 'AddEmployee')->name('add.employee');
-        Route::post('/store/employee', 'StoreEmployee')->name('employee.store');
-        Route::get('/edit/employee/{id}', 'EditEmployee')->name('edit.employee');
-        Route::post('/update/employee', 'UpdateEmployee')->name('employee.update');
-        Route::get('/delete/employee/{id}', 'DeleteEmployee')->name('delete.employee');
+        Route::get('/employee/all', 'AllEmployee')->name('employee.all');
+        Route::get('/employee/add', 'AddEmployee')->name('employee.add');
+        Route::post('/employee/store', 'StoreEmployee')->name('employee.store');
+        Route::get('/employee/edit/{id}', 'EditEmployee')->name('employee.edit');
+        Route::post('/employee/update', 'UpdateEmployee')->name('employee.update');
+        Route::get('/employee/delete/{id}', 'DeleteEmployee')->name('employee.delete');
     });
 
-
-    //all route should be use auth middleware
+    // Customer
     Route::controller(CustomerController::class)->group(function () {
-        Route::get('/all/customer', 'AllCustomer')->name('all.customer');
-        Route::get('/add/customer', 'AddCustomer')->name('add.customer');
-        Route::post('/store/customer', 'StoreCustomer')->name('customer.store');
-        Route::get('/edit/customer/{id}', 'EditCustomer')->name('edit.customer');
-        Route::post('/update/customer', 'UpdateCustomer')->name('customer.update');
-        Route::get('/delete/customer/{id}', 'DeleteCustomer')->name('delete.customer');
+        Route::get('/customer/all', 'AllCustomer')->name('customer.all');
+        Route::get('/customer/add', 'AddCustomer')->name('customer.add');
+        Route::post('/customer/store', 'StoreCustomer')->name('customer.store');
+        Route::get('/customer/edit/{id}', 'EditCustomer')->name('customer.edit');
+        Route::post('/customer/update', 'UpdateCustomer')->name('customer.update');
+        Route::get('/customer/delete/{id}', 'DeleteCustomer')->name('customer.delete');
     });
 
-
-    //Supplier All Route
+    // Supplier
     Route::controller(SupplierController::class)->group(function () {
-        Route::get('/all/supplier', 'AllSupplier')->name('all.supplier');
-        Route::get('/add/supplier', 'AddSupplier')->name('add.supplier');
-        Route::post('/store/supplier', 'StoreSupplier')->name('supplier.store');
-        Route::get('/edit/supplier/{id}', 'EditSupplier')->name('edit.supplier');
-        Route::post('/update/supplier', 'UpdateSupplier')->name('supplier.update');
-        Route::get('/delete/supplier/{id}', 'DeleteSupplier')->name('delete.supplier');
-        Route::get('/details/supplier/{id}', 'DetailsSupplier')->name('details.supplier');
+        Route::get('/supplier/all', 'AllSupplier')->name('supplier.all');
+        Route::get('/supplier/add', 'AddSupplier')->name('supplier.add');
+        Route::post('/supplier/store', 'StoreSupplier')->name('supplier.store');
+        Route::get('/supplier/edit/{id}', 'EditSupplier')->name('supplier.edit');
+        Route::post('/supplier/update', 'UpdateSupplier')->name('supplier.update');
+        Route::get('/supplier/delete/{id}', 'DeleteSupplier')->name('supplier.delete');
+        Route::get('/supplier/details/{id}', 'DetailsSupplier')->name('supplier.details');
     });
 
-
-    //Advance Salary All Route
+    // Salary
+    // Employee Salary
     Route::controller(SalaryController::class)->group(function () {
-        Route::get('/add/advance/salary', 'AddAdvanceSalary')->name('add.advance.salary');
-        Route::post('/advance/salary/store','AdvanceSalaryStore')->name('advance.salary.store');
-        Route::get('/all/advance/salary','AllAdvanceSalary')->name('all.advance.salary');
-        Route::get('/edit/advance/salary/{id}','EditAdvanceSalary')->name('edit.advance.salary');
-        Route::post('/advance/salary/update','UpdateAdvanceSalary')->name('advance.salary.update');
-        Route::get('/delete/advance/salary/{id}','DeleteAdvanceSalary')->name('delete.advance.salary');
+
+        // Advance Salary
+        Route::get('/employee/salary/advance/add', 'AddAdvanceSalary')->name('employee.salary.advance.add');
+        Route::post('/employee/salary/advance/store', 'AdvanceSalaryStore')->name('employee.salary.advance.store');
+        Route::get('/employee/salary/advance/all', 'AllAdvanceSalary')->name('employee.salary.advance.all');
+        Route::get('/employee/salary/advance/edit/{id}', 'EditAdvanceSalary')->name('employee.salary.advance.edit');
+        Route::post('/employee/salary/advance/update', 'UpdateAdvanceSalary')->name('employee.salary.advance.update');
+        Route::get('/employee/salary/advance/delete/{id}', 'DeleteAdvanceSalary')->name('employee.salary.advance.delete');
+
+        // Pay Salary
+        Route::get('/employee/salary/pay', 'PaySalary')->name('employee.salary.pay');
+        Route::get('/employee/salary/pay/now/{id}', 'PayNowSalary')->name('employee.salary.pay.now');
+        Route::post('/employee/salary/pay/store', 'EmployeeSalaryStore')->name('employee.salary.pay.store');
     });
 
-    /// Pay Salary All Route
-    Route::controller(SalaryController::class)->group(function(){
-        Route::get('/pay/salary','PaySalary')->name('pay.salary');
-        Route::get('/pay/now/salary/{id}','PayNowSalary')->name('pay.now.salary');
-        Route::post('/employee/salary/store','EmployeeSalaryStore')->name('employee.salary.store');
-    });
-
-
-    Route::controller(AttendanceController::class)->group(function(){
-        Route::get('/employee/attend/list','EmployeeAttendanceList')->name('employee.attend.list');
-        Route::get('/add/employee/attend','AddEmployeeAttendance')->name('add.employee.attend');
-        Route::post('/employee/attend/store','EmployeeAttendenceStore')->name('employee.attend.store');
-        Route::get('/edit/employee/attend/{date}','EditEmployeeAttendence')->name('employee.attend.edit');
+    // Employee Attendance
+    Route::controller(AttendanceController::class)->group(function () {
+        Route::get('/employee/attendance/list', 'EmployeeAttendanceList')->name('employee.attendance.list');
+        Route::get('/employee/attendance/add', 'AddEmployeeAttendance')->name('employee.attendance.add');
+        Route::post('/employee/attendance/store', 'EmployeeAttendenceStore')->name('employee.attendance.store');
+        Route::get('/employee/attendance/edit/{date}', 'EditEmployeeAttendence')->name('employee.attendance.edit');
         Route::post('/employee/attendance/update', 'UpdateEmployeeAttendenceStore')->name('employee.attendance.update');
-        Route::get('/view/employee/attend/{date}','ViewEmployeeAttendence')->name('employee.attend.view');
-
+        Route::get('/employee/attendance/view/{date}', 'ViewEmployeeAttendence')->name('employee.attendance.view');
     });
 
-
-
-    ///Category All Route
-    Route::controller(CategoryController::class)->group(function(){
-
-        Route::get('/all/category','AllCategory')->name('all.category');
-        Route::post('/store/category','StoreCategory')->name('category.store');
-        Route::get('/edit/category/{id}','EditCategory')->name('edit.category');
-        Route::post('/update/category','UpdateCategory')->name('category.update');
-        Route::get('/delete/category/{id}','DeleteCategory')->name('delete.category');
-
+    // Category
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/category/all', 'AllCategory')->name('category.all');
+        Route::post('/category/store', 'StoreCategory')->name('category.store');
+        Route::get('/category/edit/{id}', 'EditCategory')->name('category.edit');
+        Route::post('/category/update', 'UpdateCategory')->name('category.update');
+        Route::get('/category/delete/{id}', 'DeleteCategory')->name('category.delete');
     });
 
-
-
-    //Product All Route
-    Route::controller(ProductController::class)->group(function(){
-        Route::get('/all/product','AllProduct')->name('all.product');
-        Route::get('/add/product','AddProduct')->name('add.product');
-        Route::post('/store/product','StoreProduct')->name('product.store');
-        Route::get('/edit/product/{id}','EditProduct')->name('edit.product');
-        Route::post('/update/product','UpdateProduct')->name('product.update');
-        Route::get('/delete/product/{id}','DeleteProduct')->name('delete.product');
-        Route::get('/barcode/product/{id}','BarcodeProduct')->name('barcode.product');
-        Route::get('/import/product','ImportProduct')->name('import.product');
-        Route::get('/export','Export')->name('export');
-        Route::post('/import','Import')->name('import');
+    // Product
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/product/all', 'AllProduct')->name('product.all');
+        Route::get('/product/add', 'AddProduct')->name('product.add');
+        Route::post('/product/store', 'StoreProduct')->name('product.store');
+        Route::get('/product/edit/{id}', 'EditProduct')->name('product.edit');
+        Route::post('/product/update', 'UpdateProduct')->name('product.update');
+        Route::get('/product/delete/{id}', 'DeleteProduct')->name('product.delete');
+        Route::get('/product/barcode/{id}', 'BarcodeProduct')->name('product.barcode');
+        Route::get('/product/import', 'ImportProduct')->name('product.import.view');
+        Route::get('/product/export', 'Export')->name('product.export');
+        Route::post('/product/import', 'Import')->name('product.import');
     });
 
-
-
-    ///Expense All Route More actions
-    Route::controller(ExpenseController::class)->group(function(){
-        Route::get('/add/expense','AddExpense')->name('add.expense');
-        Route::post('/store/expense','StoreExpense')->name('expense.store');
-        Route::get('/today/expense','TodayExpense')->name('today.expense');
-
-        Route::get('/edit/expense/{id}','EditExpense')->name('edit.expense');
-        Route::post('/update/expense','UpdateExpense')->name('expense.update');
-
-        Route::get('/month/expense','MonthExpense')->name('month.expense');
-        Route::get('/year/expense','YearExpense')->name('year.expense');
+    // Expense
+    Route::controller(ExpenseController::class)->group(function () {
+        Route::get('/expense/add', 'AddExpense')->name('expense.add');
+        Route::post('/expense/store', 'StoreExpense')->name('expense.store');
+        Route::get('/expense/today', 'TodayExpense')->name('expense.today');
+        Route::get('/expense/edit/{id}', 'EditExpense')->name('expense.edit');
+        Route::post('/expense/update', 'UpdateExpense')->name('expense.update');
+        Route::get('/expense/month', 'MonthExpense')->name('expense.month');
+        Route::get('/expense/year', 'YearExpense')->name('expense.year');
     });
 
-
-
-    //POS
-    Route::controller(PosController::class)->group(function(){
-        Route::get('/pos','Pos')->name('pos');
-        Route::post('/add-cart','AddCart');
-        Route::get('/allitem','AllItem');
-        Route::post('/cart-update/{rowId}','CartUpdate');
-        Route::get('/cart-remove/{rowId}','CartRemove');
+    // POS
+    Route::controller(PosController::class)->group(function () {
+        Route::get('/pos', 'Pos')->name('pos.index');
+        Route::post('/pos/cart/add', 'AddCart')->name('pos.cart.add');
+        Route::get('/pos/cart/items', 'AllItem')->name('pos.cart.items');
+        Route::post('/pos/cart/update/{rowId}', 'CartUpdate')->name('pos.cart.update');
+        Route::get('/pos/cart/remove/{rowId}', 'CartRemove')->name('pos.cart.remove');
     });
 
-
-    // POS with own made cart (prefix: own)
+    // POS (Own)
     Route::prefix('own')->controller(PosController::class)->group(function () {
-        Route::get('/pos', 'OwnPos')->name('own.pos');
-        Route::post('/add-cart', 'OwnAddCart')->name('own.add.cart');
-        Route::post('/cart-update/{productId}', 'OwnCartUpdate')->name('own.cart.update');
-        Route::get('/cart-remove/{productId}', 'OwnCartRemove')->name('own.cart.remove');
-
-
-        //this route for testing ; showing cart items
-        Route::get('/allitem','OwnAllItem');
-        //for destroy cart item
-        Route::get('/cart-destroy', 'OwnDestroyCart')->name('own.cart.destroy');
-
-
-
-        Route::post('/create-invoice','CreateInvoice');
-
+        Route::get('/pos', 'OwnPos')->name('own.pos.index');
+        Route::post('/pos/cart/add', 'OwnAddCart')->name('own.pos.cart.add');
+        Route::post('/pos/cart/update/{productId}', 'OwnCartUpdate')->name('own.pos.cart.update');
+        Route::get('/pos/cart/remove/{productId}', 'OwnCartRemove')->name('own.pos.cart.remove');
+        Route::get('/pos/cart/items', 'OwnAllItem')->name('own.pos.cart.items');
+        Route::get('/pos/cart/destroy', 'OwnDestroyCart')->name('own.pos.cart.destroy');
+        Route::post('/pos/invoice/create', 'CreateInvoice')->name('own.pos.invoice.create');
     });
 
+    // Order
+    Route::controller(OrderController::class)->group(function () {
+        Route::post('/order/invoice/final', 'FinalInvoice')->name('order.invoice.final');
+        Route::get('/order/pending', 'PendingOrder')->name('order.pending');
+        Route::get('/order/details/{order_id}', 'OrderDetails')->name('order.details');
+        Route::post('/order/status/update', 'OrderStatusUpdate')->name('order.status.update');
+        Route::get('/order/complete', 'CompleteOrder')->name('order.complete');
+        Route::get('/order/invoice/download/{order_id}', 'OrderInvoice')->name('order.invoice.download');
 
-    ///Order All Route More actions
-    Route::controller(OrderController::class)->group(function(){
-        Route::post('/final-invoice','FinalInvoice');
-        Route::get('/pending/order','PendingOrder')->name('pending.order');
-        Route::get('/order/details/{order_id}','OrderDetails')->name('order.details');
-        Route::post('/order/status/update','OrderStatusUpdate')->name('order.status.update');
-        Route::get('/complete/order','CompleteOrder')->name('complete.order');
-        Route::get('/stock','StockManage')->name('stock.manage');
-        Route::get('/order/invoice-download/{order_id}','OrderInvoice');
+        //For Stock Manage
+        Route::get('/stock/manage', 'StockManage')->name('stock.manage');
     });
 
-
-    ///Permission All Route More actions
-    Route::controller(RoleController::class)->group(function(){
-
-        Route::get('/all/permission','AllPermission')->name('all.permission');
-        Route::get('/add/permission','AddPermission')->name('add.permission');
-        Route::post('/store/permission','StorePermission')->name('permission.store');
-
+    // Roles/Permissions
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/permission/all', 'AllPermission')->name('permission.all');
+        Route::get('/permission/add', 'AddPermission')->name('permission.add');
+        Route::post('/permission/store', 'StorePermission')->name('permission.store');
     });
-
-
-
-
-
 });
-require __DIR__ . '/auth.php';
+
+require __DIR__.'/auth.php';

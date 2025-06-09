@@ -27,7 +27,7 @@ class CategoryController extends Controller
              'alert-type' => 'success'
          );
 
-        return redirect()->route('all.category')->with($notification);
+        return redirect()->route('category.all')->with($notification);
     }// End Method
 
     public function EditCategory($id){
@@ -51,7 +51,7 @@ class CategoryController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.category')->with($notification);
+        return redirect()->route('category.all')->with($notification);
 
     }// End Method
 

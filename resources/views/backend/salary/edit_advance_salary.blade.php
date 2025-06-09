@@ -34,7 +34,7 @@
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form method="post" action="{{ route('advance.salary.update') }}">
+                                <form method="post" action="{{ route('employee.salary.advance.update') }}">
                                     @csrf
 
                                     <input type="hidden" name="id" value="{{ $salary->id }}">

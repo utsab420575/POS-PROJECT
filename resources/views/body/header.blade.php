@@ -290,7 +290,7 @@
                     </a>
 
                     <!-- item-->
-                    <a href="{{route('change.password')}}" class="dropdown-item notify-item">
+                    <a href="{{route('admin.password.change')}}" class="dropdown-item notify-item">
                         <i class="fe-lock"></i>
                         <span>Change Password</span>
                     </a>

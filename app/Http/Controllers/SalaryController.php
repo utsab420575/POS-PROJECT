@@ -45,7 +45,7 @@ class SalaryController extends Controller
                 'alert-type' => 'success'
             );
 
-            return redirect()->route('all.advance.salary')->with($notification);
+            return redirect()->route('employee.salary.advance.all')->with($notification);
 
 
         } else{
@@ -100,7 +100,7 @@ class SalaryController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.advance.salary')->with($notification);
+        return redirect()->route('employee.salary.advance.all')->with($notification);
 
 
     }// End Method
@@ -181,7 +181,7 @@ class SalaryController extends Controller
             'alert-type' => 'success'
         ];
 
-        return redirect()->route('pay.salary', [
+        return redirect()->route('employee.salary.pay', [
             'month' => $request->month,
             'year' => $request->year,
         ])->with($notification);

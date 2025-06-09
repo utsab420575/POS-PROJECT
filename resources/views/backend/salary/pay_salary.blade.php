@@ -15,7 +15,8 @@
                         <h4 class="page-title mb-0">All Pay Salary</h4>
                         <div class="page-title-right">
                             <div class="page-title-right">
-                                <form action="{{route('pay.salary')}}" method="GET" class="d-flex align-items-center gap-2 pb-4">
+                                <form action="{{route('employee.salary.pay')}}" method="GET"
+                                      class="d-flex align-items-center gap-2 pb-4">
 
                                     @php
                                         if (!empty($month) && !empty($year)) {
@@ -57,7 +58,7 @@
             <!-- end page title -->
 
 
-                <div class="row">
+            <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
@@ -83,14 +84,15 @@
                                         @php
                                             $advance = $item->getAdvanceSalary($month, $year);
                                             $advanceAmount = $advance?->advance_salary ?? 0;
-                                            $due = $item->salary - $advanceAmount;
+                                              $due = (float)$item->salary - (float)$advanceAmount; //String converted to flocat
 
                                             //for check already paid or not
                                             $alreadyPaid = $item->hasPaidSalary($month, $year);
                                         @endphp
                                         <tr>
                                             <td>{{ $key+1 }}</td>
-                                            <td><img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"></td>
+                                            <td><img src="{{ asset($item->image) }}" style="width:50px; height: 40px;">
+                                            </td>
                                             <td>{{ $item->name }}</td>
                                             <td><span class="badge bg-info"> {{ $month }} </span>
                                             </td>
@@ -99,20 +101,24 @@
                                             <td>{{$due}}</td>
                                             <td>
                                                 @if($alreadyPaid)
-                                                    <button class="btn btn-secondary rounded-pill" disabled>Already Paid</button>
+                                                    <button class="btn btn-secondary rounded-pill" disabled>Already
+                                                        Paid
+                                                    </button>
                                                 @else
-                                                    <a href="{{ route('pay.now.salary', $item->id) }}?month={{ $month }}&year={{ $year }}"
-                                                       class="btn btn-blue rounded-pill waves-effect waves-light">Pay Now</a>
+                                                    <a href="{{ route('employee.salary.pay.now', $item->id) }}?month={{ $month }}&year={{ $year }}"
+                                                       class="btn btn-blue rounded-pill waves-effect waves-light">Pay
+                                                        Now</a>
                                                 @endif
 
                                             </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                {{--no month year selected show error message--}}
+                                    {{--no month year selected show error message--}}
                                 @else
                                     <div class="alert alert-info mt-3">
-                                        Please select a <strong>Month</strong> and <strong>Year</strong> to view salary data.
+                                        Please select a <strong>Month</strong> and <strong>Year</strong> to view salary
+                                        data.
                                     </div>
                                 @endif
                             </table>

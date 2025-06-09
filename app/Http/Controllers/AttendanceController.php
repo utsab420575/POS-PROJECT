@@ -60,7 +60,7 @@ class AttendanceController extends Controller
             ]);
         }
 
-        return redirect()->route('employee.attend.list')->with([
+        return redirect()->route('employee.attendance.list')->with([
             'message' => 'Attendance saved successfully.',
             'alert-type' => 'success'
         ]);
@@ -112,7 +112,7 @@ class AttendanceController extends Controller
             );
         }
 
-        return redirect()->route('employee.attend.list')->with([
+        return redirect()->route('employee.attendance.list')->with([
             'message' => 'Attendance updated successfully.',
             'alert-type' => 'success'
         ]);

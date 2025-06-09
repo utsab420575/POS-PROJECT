@@ -12,7 +12,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('add.employee.attend') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Employee Attendance  </a>
+                                <a href="{{ route('employee.attendance.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Employee Attendance  </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Employee Attendance</h4>
@@ -43,8 +43,8 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ date('Y-m-d', strtotime($item->date))  }}</td>
                                         <td>
-                                            <a href="{{ route('employee.attend.edit',$item->date) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{route('employee.attend.view',$item->date)}}" class="btn btn-danger rounded-pill waves-effect waves-light" >View</a>
+                                            <a href="{{ route('employee.attendance.edit',$item->date) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{route('employee.attendance.view',$item->date)}}" class="btn btn-danger rounded-pill waves-effect waves-light" >View</a>
 
                                         </td>
                                     </tr>

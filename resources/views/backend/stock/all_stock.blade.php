@@ -13,12 +13,12 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
 
-                                <a href="{{ route('import.product') }}" class="btn btn-info rounded-pill waves-effect waves-light">Import </a>
+                                <a href="{{ route('product.import.view') }}" class="btn btn-info rounded-pill waves-effect waves-light">Import </a>
                                 &nbsp;&nbsp;&nbsp;
-                                <a href="{{ route('export') }}" class="btn btn-danger rounded-pill waves-effect waves-light">Export </a>
+                                <a href="{{ route('product.export') }}" class="btn btn-danger rounded-pill waves-effect waves-light">Export </a>
                                 &nbsp;&nbsp;&nbsp;
 
-                                <a href="{{ route('add.product') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
+                                <a href="{{ route('product.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Product</h4>

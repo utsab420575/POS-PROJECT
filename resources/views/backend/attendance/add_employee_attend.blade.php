@@ -9,7 +9,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('employee.attend.list') }}" class="btn btn-primary p-2 ps-4 pe-4 mb-2"><i class="fas fa-list"></i>
+                                <a href="{{ route('employee.attendance.list') }}" class="btn btn-primary p-2 ps-4 pe-4 mb-2"><i class="fas fa-list"></i>
                                     Attendance List</a>
                             </ol>
                         </div>
@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{route('employee.attend.store')}}" method="POST" id="attendanceForm">
+                            <form action="{{route('employee.attendance.store')}}" method="POST" id="attendanceForm">
                                 @csrf
                                 <div class="form-group col-md-4">
                                     <label for="date">Attendance Date</label>
