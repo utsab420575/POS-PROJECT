@@ -172,7 +172,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/permission/all', 'AllPermission')->name('permission.all');
         Route::get('/permission/add', 'AddPermission')->name('permission.add');
         Route::post('/permission/store', 'StorePermission')->name('permission.store');
-
         Route::get('/permission/edit/{id}', 'EditPermission')->name('permission.edit');
         Route::post('/permission/update', 'UpdatePermission')->name('permission.update');
         Route::get('/permission/delete/{id}', 'DeletePermission')->name('permission.delete');
@@ -182,6 +181,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/roles/all', 'AllRoles')->name('roles.all');
         Route::get('/roles/add', 'AddRoles')->name('roles.add');
         Route::post('/roles/store', 'StoreRoles')->name('roles.store');
+        Route::get('/roles/edit/{id}', 'EditRoles')->name('roles.edit');
+        Route::post('/roles/update', 'UpdateRoles')->name('roles.update');
+        Route::get('/roles/delete/{id}', 'DeleteRoles')->name('roles.delete');
     });
 });
 

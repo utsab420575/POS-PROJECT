@@ -44,9 +44,9 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            <a href="{{ route('permission.edit',$item->id) }}"
+                                            <a href="{{ route('roles.edit',$item->id) }}"
                                                class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('permission.delete',$item->id) }}"
+                                            <a href="{{ route('roles.delete',$item->id) }}"
                                                class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
 
                                         </td>
