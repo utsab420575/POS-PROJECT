@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -266,5 +267,27 @@ class RoleController extends Controller
     }// End Method
 
 
+
+    public function DeleteRolesPermission($id){
+
+
+        $role = Role::findOrFail($id);
+
+        //return $role;
+        Log::info('role', $role->toArray());
+        if (!is_null($role)) {
+            Log::info('inside role permission', $role->toArray());
+            // Remove all permissions from this role
+            $role->syncPermissions([]); // Equivalent to "detach all"
+        }
+
+        $notification = [
+            'message' => 'All Permissions Removed from Role Successfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->back()->with($notification);
+
+    }// End Method
 
 }
