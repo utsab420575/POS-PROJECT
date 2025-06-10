@@ -12,7 +12,7 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('customer.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Admin </a>
+                                <a href="{{ route('role.assignments.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add User </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Admin <span class="btn btn-danger">{{ count($allUsers) }}</span> </h4>

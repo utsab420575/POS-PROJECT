@@ -201,7 +201,8 @@ Route::middleware('auth')->group(function () {
 
     ///Admin User All Route More actions
     Route::controller(RoleAssignmentController::class)->group(function(){
-        Route::get('/role/assignments', 'index')->name('role.assignments.index');
+        Route::get('/role/assignments', 'AllRoleAssignments')->name('role.assignments.all');
+        Route::get('/role/assignments/add','AddRoleAssignments')->name('role.assignments.add');
     });
 
 });

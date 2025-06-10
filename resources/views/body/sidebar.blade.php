@@ -286,7 +286,10 @@
                     <div class="collapse" id="admin">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="{{ route('role.assignments.index') }}">All User </a>
+                                <a href="{{ route('role.assignments.all') }}">All User </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('role.assignments.add') }}">Add User </a>
                             </li>
 
                         </ul>
