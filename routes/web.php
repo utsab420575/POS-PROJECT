@@ -199,10 +199,11 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    ///Admin User All Route More actions
+    // User Add/Edit/Delete
     Route::controller(RoleAssignmentController::class)->group(function(){
         Route::get('/role/assignments', 'AllRoleAssignments')->name('role.assignments.all');
         Route::get('/role/assignments/add','AddRoleAssignments')->name('role.assignments.add');
+        Route::post('/role/assignments/store','StoreRoleAssignments')->name('role.assignments.store');
     });
 
 });

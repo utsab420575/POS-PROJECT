@@ -45,11 +45,16 @@
                                 @foreach($allUsers as $key=> $user)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ (!empty($user->photo)) ? url('upload/admin_image/'.$user->photo) : url('upload/no_image.jpg') }}" style="width:50px; height: 40px;"> </td>
+                                        <td> <img src="{{ (!empty($user->photo)) ? url('upload/user_image/'.$user->photo) : url('upload/no_image.jpg') }}" style="width:50px; height: 40px;"> </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
-                                        <td> Role </td>
+                                        <td>
+                                            @foreach($user->roles as $role)
+                                                <span class="badge badge-pill bg-danger"> {{ $role->name }} </span>
+                                            @endforeach
+                                        </td>
+
                                         <td>
                                             <a href="{{ route('customer.edit',$user->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
                                             <a href="{{ route('customer.delete',$user->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
