@@ -50,9 +50,8 @@
 
                                         </td>
                                         <td width="18%">
-                                            <a href="{{ route('permission.edit',$role->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{ route('role.permission.store.edit',$role->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
                                             <a href="{{ route('permission.delete',$role->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
-
                                         </td>
                                     </tr>
                                 @endforeach

@@ -229,5 +229,13 @@ class RoleController extends Controller
         return view('backend.pages.roles.all_roles_permission', compact('roles'));
     } // End Method
 
+    public function EditRolePermissions($id){
+
+        $role = Role::findOrFail($id);
+        $permissions = Permission::all()->groupBy('group_name');
+        return view('backend.pages.roles.edit_roles_permission',compact('role','permissions','permissions'));
+
+    } // End Method
+
 
 }

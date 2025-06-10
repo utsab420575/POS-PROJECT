@@ -59,7 +59,7 @@
 
                                         <div class="form-check mb-2 form-check-primary">
                                             <input class="form-check-input" type="checkbox" value="" id="select_all">
-                                            <label class="form-check-label" for="select_all">Primary</label>
+                                            <label class="form-check-label" for="select_all">Select All</label>
                                         </div>
 
                                     </div>
