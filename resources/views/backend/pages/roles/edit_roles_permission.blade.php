@@ -35,12 +35,13 @@
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form id="myForm" method="post" action="{{  route('role.permission.store') }}"
+                                <form id="myForm" method="post" action="{{  route('role.permission.update') }}"
                                       enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$role->id}}">
 
-                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Edit Role
+                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Edit
+                                        Role
                                         In Permission</h5>
 
                                     <div class="row">
@@ -59,12 +60,13 @@
                                             $isAllSelected = $allPermissions->diff($rolePermissionIds)->isEmpty(); // means all are assigned
                                         @endphp
                                         <div class="form-check mb-2 form-check-primary">
-                                            <input class="form-check-input" type="checkbox" value="" id="select_all" {{ $isAllSelected ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="select_all" {{ $isAllSelected ? 'checked' : '' }}>
                                             <label class="form-check-label" for="select_all">Select All</label>
                                         </div>
-
                                     </div>
                                     <hr>
+
                                     @foreach($permissions as $groupName => $groupPermissions)
                                         {{--one group will be in one row--}}
                                         <div class="row">
@@ -85,7 +87,8 @@
                                                         id="group_{{ $loop->index }}"
                                                         {{ $allChecked ? 'checked' : '' }}
                                                     >
-                                                    <label class="form-check-label" for="group_{{ $loop->index }}">{{$groupName}}</label>
+                                                    <label class="form-check-label"
+                                                           for="group_{{ $loop->index }}">{{$groupName}}</label>
                                                 </div>
 
                                             </div>
@@ -94,47 +97,44 @@
                                             <div class="col-9">
                                                 @foreach($groupPermissions as $permission)
                                                     <div class="form-check mb-2 form-check-primary">
-                                                        <input class="form-check-input permission-checkbox group_{{ $loop->parent->index }}"
-                                                               name="permission[]"
-                                                               type="checkbox"
-                                                               value="{{ $permission->id }}"
-                                                               id="perm_{{ $permission->id }}"
-                                                                {{ $role->permissions->contains('id', $permission->id) ? 'checked' : '' }}>
+                                                        <input
+                                                            class="form-check-input permission-checkbox group_{{ $loop->parent->index }}"
+                                                            name="permission[]"
+                                                            type="checkbox"
+                                                            value="{{ $permission->id }}"
+                                                            id="perm_{{ $permission->id }}"
+                                                            {{ $role->permissions->contains('id', $permission->id) ? 'checked' : '' }}>
 
 
-                                                        <label class="form-check-label" for="perm_{{ $permission->id }}">
+                                                        <label class="form-check-label"
+                                                               for="perm_{{ $permission->id }}">
                                                             {{$permission->name}}
                                                         </label>
                                                     </div>
-
-
                                                 @endforeach
                                             </div>
-
                                         </div> <!-- end row -->
                                         <br>
-                                @endforeach
-                            </div> <!-- end row -->
+                                    @endforeach
 
-
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
-                                        class="mdi mdi-content-save"></i> Save
-                                </button>
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
+                                                class="mdi mdi-content-save"></i> Save
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
-                            </form>
+                            <!-- end settings content-->
+
+
                         </div>
-                        <!-- end settings content-->
+                    </div> <!-- end card-->
 
+                </div> <!-- end col -->
+            </div>
+            <!-- end row-->
 
-                    </div>
-                </div> <!-- end card-->
-
-            </div> <!-- end col -->
-        </div>
-        <!-- end row-->
-
-    </div> <!-- container -->
+        </div> <!-- container -->
 
     </div> <!-- content -->
 
@@ -162,6 +162,5 @@
               });*/
         });
     </script>
-
 
 @endsection

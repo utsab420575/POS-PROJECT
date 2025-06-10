@@ -192,11 +192,8 @@ Route::middleware('auth')->group(function () {
         //Role and related permission store into database
         Route::post('/role/permission/store','StoreRolesPermission')->name('role.permission.store');
         Route::get('roles/permission/all','AllRolesPermission')->name('roles.permission.all');
-        Route::get('roles/permission/edit/{id}','EditRolePermissions')->name('role.permission.store.edit');
-
-
-
-
+        Route::get('roles/permission/edit/{id}','EditRolePermissions')->name('role.permission.edit');
+        Route::post('/role/permission/update','UpdateRolePermission')->name('role.permission.update');
 
     });
 });

@@ -237,5 +237,34 @@ class RoleController extends Controller
 
     } // End Method
 
+    public function UpdateRolePermission(Request $request){
+
+        //return $request->id;
+        $request->validate([
+            'permission' => 'required|array',
+            'permission.*' => 'exists:permissions,id',
+        ]);
+        $role = Role::findOrFail($request->id);
+        $permissions = $request->permission;
+
+       /* $role->syncPermissions($permissionModels); eqivalent to :
+        DELETE FROM role_has_permissions WHERE role_id = ?
+        INSERT INTO role_has_permissions (role_id, permission_id) VALUES (?, ?), (?, ?), ...*/
+
+        if (!empty($permissions)) {
+            $permissionModels = Permission::whereIn('id', $permissions)->get();
+            $role->syncPermissions($permissionModels);
+        }
+
+         $notification = array(
+             'message' => 'Role Permission Updated Successfully',
+             'alert-type' => 'success'
+         );
+
+        return redirect()->route('roles.permission.all')->with($notification);
+
+    }// End Method
+
+
 
 }
