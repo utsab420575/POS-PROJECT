@@ -165,10 +165,63 @@ class RoleController extends Controller
     public function AddRolesPermission(){
         //need all role and all permission
         $roles = Role::all();
-        $permissions = Permission::all();
+        //$permissions = Permission::all();
+        // Group all permissions by group_name(it will return group wise all permission)
+        //dd(Permission::all()->groupBy('group_name'));
+            /*Collection {
+                'employee' => Collection [
+                    Permission { id: 1, name: 'employee.all', group_name: 'employee' },
+                    Permission { id: 2, name: 'employee.add', group_name: 'employee' },
+                ],
+                'user' => Collection [
+                    Permission { id: 3, name: 'user.view', group_name: 'user' },
+                    Permission { id: 4, name: 'user.reset', group_name: 'user' },
+                ],
+                'student' => Collection [
+                    Permission { id: 5, name: 'student.list', group_name: 'student' },
+                    Permission { id: 6, name: 'student.add', group_name: 'student' },
+                ]
+            }*/
+        $permissions = Permission::all()->groupBy('group_name');
         return view('backend.pages.roles.add_roles_permission',compact('roles','permissions'));
     }// End Method
 
+    public function StoreRolesPermission(Request $request){
+        $request->validate([
+            'role_id' => 'required|exists:roles,id',
+            'permission' => 'required|array',
+            'permission.*' => 'exists:permissions,id',
+        ]);
+
+        //dd($request->role_id);
+        // Get the role
+        $role = Role::findOrFail($request->role_id);
+
+       /* Way1:
+        // Convert IDs to names
+        $permissionNames = Permission::whereIn('id', $request->permission)
+            ->pluck('name')
+            ->toArray();
+
+        // Sync by names (Spatie needs names, not IDs)
+        $role->syncPermissions($permissionNames);*/
+
+        // Clear old permissions for this role(optional)
+        $role->revokePermissionTo(Permission::all());
+
+        // Assign new permissions using loop
+        foreach ($request->permission as $permId) {
+            $permission = Permission::findById($permId);
+            $role->givePermissionTo($permission);
+        }
+
+        $notification = array(
+            'message' => 'Role Permission Added Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('roles.all')->with($notification);
+    }
 
 
 }
