@@ -45,7 +45,7 @@
                                 @foreach($allUsers as $key=> $user)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ (!empty($user->photo)) ? url('upload/user_image/'.$user->photo) : url('upload/no_image.jpg') }}" style="width:50px; height: 40px;"> </td>
+                                        <td> <img src="{{ (!empty($user->photo)) ? asset($user->photo) : url('upload/no_image.jpg') }}" style="width:50px; height: 40px;"> </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
@@ -56,8 +56,8 @@
                                         </td>
 
                                         <td>
-                                            <a href="{{ route('customer.edit',$user->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('customer.delete',$user->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            <a href="{{ route('role.assignments.edit',$user->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            <a href="{{ route('role.assignments.delete',$user->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
 
                                         </td>
                                     </tr>

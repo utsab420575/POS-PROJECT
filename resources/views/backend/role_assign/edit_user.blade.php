@@ -13,11 +13,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Add Admin</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Edit Admin</a></li>
 
                             </ol>
                         </div>
-                        <h4 class="page-title">Add Admin</h4>
+                        <h4 class="page-title">Edit Admin</h4>
                     </div>
                 </div>
             </div>
@@ -31,16 +31,17 @@
                         <div class="card-body">
 
 
-
-
-
                             <!-- end timeline content-->
 
                             <div class="tab-pane" id="settings">
-                                <form id="myForm" method="post" action="{{ route('role.assignments.store') }}" enctype="multipart/form-data">
+                                <form id="myForm" method="post" action="{{ route('role.assignments.update') }}"
+                                      enctype="multipart/form-data">
                                     @csrf
 
-                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Add Admin</h5>
+                                    <input type="hidden" name="id" value="{{ $user->id }}">
+
+                                    <h5 class="mb-4 text-uppercase"><i class="mdi mdi-account-circle me-1"></i> Edit
+                                        User</h5>
 
                                     <div class="row">
 
@@ -48,7 +49,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label"> Name</label>
-                                                <input type="text" name="name" class="form-control"   >
+                                                <input type="text" name="name" class="form-control"
+                                                       value="{{ $user->name }}">
 
                                             </div>
                                         </div>
@@ -56,7 +58,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label"> Email</label>
-                                                <input type="email" name="email" class="form-control"   >
+                                                <input type="email" name="email" class="form-control"
+                                                       value="{{ $user->email }}">
 
                                             </div>
                                         </div>
@@ -65,16 +68,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label"> Phone</label>
-                                                <input type="text" name="phone" class="form-control"   >
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label for="firstname" class="form-label"> Password </label>
-                                                <input type="password" name="password" class="form-control"   >
+                                                <input type="text" name="phone" class="form-control"
+                                                       value="{{ $user->phone }}">
 
                                             </div>
                                         </div>
@@ -84,17 +79,15 @@
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label">Asign Roles </label>
                                                 <select name="roles" class="form-select" id="example-select">
-                                                    <option selected disabled >Select Roles </option>
+                                                    <option selected disabled>Select Roles</option>
                                                     @foreach($roles as $role)
-                                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                        <option
+                                                            value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }} >{{ $role->name }}</option>
                                                     @endforeach
                                                 </select>
 
                                             </div>
                                         </div>
-
-
-
 
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
@@ -108,19 +101,19 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="example-fileinput" class="form-label"> </label>
-                                                <img id="showImage" src="{{  url('upload/no_image.jpg') }}" class="rounded-circle avatar-lg img-thumbnail"
+                                                <img id="showImage" src="{{ $user->photo ? asset($user->photo) : asset('upload/no_image.jpg') }}"  class="rounded-circle avatar-lg img-thumbnail"
                                                      alt="profile-image">
                                             </div>
                                         </div> <!-- end col -->
 
 
-
                                     </div> <!-- end row -->
 
 
-
                                     <div class="text-end">
-                                        <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i class="mdi mdi-content-save"></i> Save</button>
+                                        <button type="submit" class="btn btn-success waves-effect waves-light mt-2"><i
+                                                class="mdi mdi-content-save"></i> Save
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -139,26 +132,18 @@
     </div> <!-- content -->
 
 
-
-
     <script type="text/javascript">
 
-        $(document).ready(function(){
-            $('#image').change(function(e){
+        $(document).ready(function () {
+            $('#image').change(function (e) {
                 var reader = new FileReader();
-                reader.onload =  function(e){
-                    $('#showImage').attr('src',e.target.result);
+                reader.onload = function (e) {
+                    $('#showImage').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(e.target.files['0']);
             });
         });
 
     </script>
-
-
-
-
-
-
 
 @endsection

@@ -204,6 +204,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/role/assignments', 'AllRoleAssignments')->name('role.assignments.all');
         Route::get('/role/assignments/add','AddRoleAssignments')->name('role.assignments.add');
         Route::post('/role/assignments/store','StoreRoleAssignments')->name('role.assignments.store');
+
+
+        Route::get('/role/assignments/edit/{id}','EditRoleAssignments')->name('role.assignments.edit');
+        Route::post('/role/assignments/update','UpdateRoleAssignments')->name('role.assignments.update');
+        Route::get('/role/assignments/delete/{id}','DeleteRoleAssignments')->name('role.assignments.delete');
     });
 
 });
