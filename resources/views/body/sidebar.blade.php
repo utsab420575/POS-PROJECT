@@ -277,6 +277,24 @@
                 </li>
 
 
+                <li>
+                    <a href="#admin" data-bs-toggle="collapse">
+                        <i class="mdi mdi-email-multiple-outline"></i>
+                        <span> Setting Admin User    </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="admin">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('role.assignments.index') }}">All User </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+
+
+
 
 
 

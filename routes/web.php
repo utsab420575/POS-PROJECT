@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleAssignmentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\SupplierController;
@@ -196,6 +197,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/role/permission/update','UpdateRolePermission')->name('role.permission.update');
         Route::get('/role/permission/delete/{id}','DeleteRolesPermission')->name('role.permission.delete');
     });
+
+
+    ///Admin User All Route More actions
+    Route::controller(RoleAssignmentController::class)->group(function(){
+        Route::get('/role/assignments', 'index')->name('role.assignments.index');
+    });
+
 });
 
 require __DIR__ . '/auth.php';
