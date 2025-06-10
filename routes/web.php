@@ -189,8 +189,9 @@ Route::middleware('auth')->group(function () {
         ///Add Roles in Permission All Route (Assign Permission(Route) In Roles)
         /// Here We select Which Role Can Access Which Permission
         Route::get('/roles/permissions/add', 'AddRolesPermission')->name('roles.permissions.add');
-        //Role and related permissino store into database
+        //Role and related permission store into database
         Route::post('/role/permission/store','StoreRolesPermission')->name('role.permission.store');
+        Route::get('roles/permission/all','AllRolesPermission')->name('roles.permission.all');
 
 
 
