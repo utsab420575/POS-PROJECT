@@ -2,6 +2,7 @@
 
 return [
 
+
     'models' => [
 
         /*
@@ -198,5 +199,9 @@ return [
          */
 
         'store' => 'default',
+    ],
+
+    'defaults' => [
+        'guard_name' => 'web',
     ],
 ];

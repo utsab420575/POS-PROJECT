@@ -28,7 +28,8 @@ class RoleAssignmentController extends Controller
             'email'    => 'required|string|email|max:255|unique:users',
             'phone'    => 'nullable|string|max:20',
             'password' => 'required|string|min:6',
-            'roles'    => 'required|exists:roles,id',
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,id',
             'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
         ]);
 
@@ -72,8 +73,10 @@ class RoleAssignmentController extends Controller
         // Assign role using Spatie
 
         if ($request->roles) {
-            $role = Role::findById($request->roles);
-            $user->assignRole($role);
+            /*$role = Role::findById($request->roles);
+            $user->assignRole($role);*/
+            $roles = Role::whereIn('id', $request->roles)->get();
+            $user->syncRoles($roles); // Pass Role instances instead of IDs
         }
 
         $notification = array(
@@ -106,7 +109,8 @@ class RoleAssignmentController extends Controller
                 'name'  => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email,' . $request->id,
                 'phone' => 'nullable|string|max:20',
-                'roles' => 'required|exists:roles,id',
+                'roles' => 'required|array',
+                'roles.*' => 'exists:roles,id',
                 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5048',
             ]);
 
@@ -156,8 +160,10 @@ class RoleAssignmentController extends Controller
             /*// Sync roles (using sync instead of detach+assign for better handling)
             $user->syncRoles($request->roles);*/
             if ($request->roles) {
-                $role = Role::findById($request->roles);
-                $user->syncRoles([$role]);
+                /*$role = Role::findById($request->roles);
+                $user->syncRoles([$role]);*/
+                $roles = Role::whereIn('id', $request->roles)->get();
+                $user->syncRoles($roles); // Pass Role instances instead of IDs
             }
 
             $notification = [

@@ -78,8 +78,8 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label for="firstname" class="form-label">Asign Roles </label>
-                                                <select name="roles" class="form-select" id="example-select">
-                                                    <option selected disabled>Select Roles</option>
+                                                <select name="roles[]" class="form-select" id="example-select" multiple>
+                                                    <option disabled>Select Roles</option>
                                                     @foreach($roles as $role)
                                                         <option
                                                             value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }} >{{ $role->name }}</option>
