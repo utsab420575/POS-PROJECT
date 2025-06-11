@@ -12,7 +12,8 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('permission.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Permission </a>
+                                <a href="{{ route('permission.add') }}"
+                                   class="btn btn-primary rounded-pill waves-effect waves-light">Add Permission </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Permission</h4>
@@ -31,8 +32,8 @@
                                 <thead>
                                 <tr>
                                     <th>Sl</th>
-                                    <th>Permission Name </th>
-                                    <th>Group Name </th>
+                                    <th>Permission Name</th>
+                                    <th>Group Name</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -45,9 +46,15 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->group_name }}</td>
                                         <td>
-                                            <a href="{{ route('permission.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('permission.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
-
+                                            @if(Auth::user()->can('permission.edit'))
+                                                <a href="{{ route('permission.edit',$item->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('permission.delete'))
+                                                <a href="{{ route('permission.delete',$item->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -61,10 +68,7 @@
             <!-- end row-->
 
 
-
-
         </div> <!-- container -->
     </div> <!-- content -->
-
 
 @endsection

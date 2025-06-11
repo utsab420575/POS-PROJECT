@@ -12,7 +12,8 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('customer.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Customer </a>
+                                <a href="{{ route('customer.add') }}"
+                                   class="btn btn-primary rounded-pill waves-effect waves-light">Add Customer </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Customer</h4>
@@ -45,15 +46,21 @@
                                 @foreach($customer as $key=> $item)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"> </td>
+                                        <td><img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"></td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->shopname }}</td>
                                         <td>
-                                            <a href="{{ route('customer.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('customer.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
-
+                                            @if(Auth::user()->can('customer.edit'))
+                                                <a href="{{ route('customer.edit',$item->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('customer.delete'))
+                                                <a href="{{ route('customer.delete',$item->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -67,11 +74,8 @@
             <!-- end row-->
 
 
-
-
         </div> <!-- container -->
 
     </div> <!-- content -->
-
 
 @endsection

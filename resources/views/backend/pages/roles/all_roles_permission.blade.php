@@ -12,7 +12,8 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="" class="btn btn-primary rounded-pill waves-effect waves-light">Add Role in Permission </a>
+                                <a href="" class="btn btn-primary rounded-pill waves-effect waves-light">Add Role in
+                                    Permission </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Roles Permission</h4>
@@ -27,12 +28,12 @@
                         <div class="card-body">
 
 
-                            <table  class="table dt-responsive nowrap w-100">
+                            <table class="table dt-responsive nowrap w-100">
                                 <thead>
                                 <tr>
                                     <th>Sl</th>
-                                    <th>Roles Name </th>
-                                    <th>Permission Name </th>
+                                    <th>Roles Name</th>
+                                    <th>Permission Name</th>
                                     <th width="18%">Action</th>
                                 </tr>
                                 </thead>
@@ -50,8 +51,15 @@
 
                                         </td>
                                         <td width="18%">
-                                            <a href="{{ route('role.permission.edit',$role->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('role.permission.delete',$role->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            @if(Auth::user()->can('role.permission.edit'))
+                                                <a href="{{ route('role.permission.edit',$role->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('role.permission.delete'))
+                                                <a href="{{ route('role.permission.delete',$role->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -65,11 +73,8 @@
             <!-- end row-->
 
 
-
-
         </div> <!-- container -->
 
     </div> <!-- content -->
-
 
 @endsection

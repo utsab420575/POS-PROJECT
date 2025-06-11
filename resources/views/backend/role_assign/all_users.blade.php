@@ -12,10 +12,11 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('role.assignments.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add User </a>
+                                <a href="{{ route('role.assignments.add') }}"
+                                   class="btn btn-primary rounded-pill waves-effect waves-light">Add User </a>
                             </ol>
                         </div>
-                        <h4 class="page-title">All Admin <span class="btn btn-danger">{{ count($allUsers) }}</span> </h4>
+                        <h4 class="page-title">All Admin <span class="btn btn-danger">{{ count($allUsers) }}</span></h4>
                     </div>
                 </div>
             </div>
@@ -45,7 +46,9 @@
                                 @foreach($allUsers as $key=> $user)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ (!empty($user->photo)) ? asset($user->photo) : url('upload/no_image.jpg') }}" style="width:50px; height: 40px;"> </td>
+                                        <td><img
+                                                src="{{ (!empty($user->photo)) ? asset($user->photo) : url('upload/no_image.jpg') }}"
+                                                style="width:50px; height: 40px;"></td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
@@ -56,8 +59,15 @@
                                         </td>
 
                                         <td>
-                                            <a href="{{ route('role.assignments.edit',$user->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('role.assignments.delete',$user->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            @if(Auth::user()->can('role.assignments.edit'))
+                                                <a href="{{ route('role.assignments.edit',$user->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('role.assignments.delete'))
+                                                <a href="{{ route('role.assignments.delete',$user->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
 
                                         </td>
                                     </tr>
@@ -74,6 +84,5 @@
         </div> <!-- container -->
 
     </div> <!-- content -->
-
 
 @endsection

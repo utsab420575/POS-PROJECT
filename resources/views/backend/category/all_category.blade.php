@@ -12,7 +12,9 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 {{--modal button; this button open modal--}}
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signup-modal">Add Category</button>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#signup-modal">Add Category
+                                </button>
                             </ol>
                         </div>
                         <h4 class="page-title">All Category</h4>
@@ -41,9 +43,15 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $item->category_name }}</td>
                                         <td>
-                                            <a href="{{ route('category.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('category.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
-
+                                            @if(Auth::user()->can('category.edit'))
+                                                <a href="{{ route('category.edit',$item->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('category.delete'))
+                                                <a href="{{ route('category.delete',$item->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

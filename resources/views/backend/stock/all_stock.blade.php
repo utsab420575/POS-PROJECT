@@ -13,12 +13,20 @@
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
 
-                                <a href="{{ route('product.import.view') }}" class="btn btn-info rounded-pill waves-effect waves-light">Import </a>
-                                &nbsp;&nbsp;&nbsp;
-                                <a href="{{ route('product.export') }}" class="btn btn-danger rounded-pill waves-effect waves-light">Export </a>
-                                &nbsp;&nbsp;&nbsp;
 
-                                <a href="{{ route('product.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
+                                @if(Auth::user()->can('product.import.view'))
+                                    <a href="{{ route('product.import.view') }}"
+                                       class="btn btn-info rounded-pill waves-effect waves-light">Import </a>
+                                @endif
+                                @if(Auth::user()->can('product.export'))
+                                    <a href="{{ route('product.export') }}"
+                                       class="btn btn-danger rounded-pill waves-effect waves-light">Export </a>
+                                @endif
+                                &nbsp;&nbsp;&nbsp;
+                                @if(Auth::user()->can('product.add'))
+                                    <a href="{{ route('product.add') }}"
+                                       class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
+                                @endif
                             </ol>
                         </div>
                         <h4 class="page-title">All Product</h4>
@@ -51,12 +59,16 @@
                                 @foreach($product as $key=> $item)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ asset($item->product_image) }}" style="width:50px; height: 40px;"> </td>
+                                        <td><img src="{{ asset($item->product_image) }}"
+                                                 style="width:50px; height: 40px;"></td>
                                         <td>{{ $item->product_name }}</td>
                                         <td>{{ $item->category->category_name}}</td>
                                         <td>{{$item->supplier->name}}</td>
                                         <td>{{ $item->product_code }}</td>
-                                        <td> <button class="btn btn-warning waves-effect waves-light">{{ $item->product_store }}</button> </td>
+                                        <td>
+                                            <button
+                                                class="btn btn-warning waves-effect waves-light">{{ $item->product_store }}</button>
+                                        </td>
 
                                     </tr>
                                 @endforeach
@@ -70,11 +82,8 @@
             <!-- end row-->
 
 
-
-
         </div> <!-- container -->
 
     </div> <!-- content -->
-
 
 @endsection

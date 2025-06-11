@@ -12,7 +12,8 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('supplier.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Supplier </a>
+                                <a href="{{ route('supplier.add') }}"
+                                   class="btn btn-primary rounded-pill waves-effect waves-light">Add Supplier </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Supplier</h4>
@@ -45,15 +46,28 @@
                                 @foreach($supplier as $key=> $item)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"> </td>
+                                        <td><img src="{{ asset($item->image) }}" style="width:50px; height: 40px;"></td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->phone }}</td>
                                         <td>{{ $item->type }}</td>
                                         <td>
-                                            <a href="{{ route('supplier.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                            <a href="{{ route('supplier.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            <a href="{{ route('supplier.details',$item->id) }}" class="btn btn-info rounded-pill waves-effect waves-light" title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            @if(Auth::user()->can('supplier.edit'))
+                                                <a href="{{ route('supplier.edit',$item->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light"
+                                                   title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            @endif
+                                            @if(Auth::user()->can('supplier.delete'))
+                                                <a href="{{ route('supplier.delete',$item->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete" title="Delete"><i class="fa fa-trash"
+                                                                                 aria-hidden="true"></i></a>
+                                            @endif
+                                            @if(Auth::user()->can('supplier.details'))
+                                                <a href="{{ route('supplier.details',$item->id) }}"
+                                                   class="btn btn-info rounded-pill waves-effect waves-light"
+                                                   title="Details"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -67,11 +81,8 @@
             <!-- end row-->
 
 
-
-
         </div> <!-- container -->
 
     </div> <!-- content -->
-
 
 @endsection

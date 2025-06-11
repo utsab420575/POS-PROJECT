@@ -53,10 +53,15 @@
                                         <td>{{ $item->employee->salary }}</td>
                                         <td>{{ $item->advance_salary }}</td>
                                         <td>
-                                            <a href="{{ route('employee.salary.advance.edit',$item->id) }}"
-                                               class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('employee.salary.advance.delete',$item->id) }}"
-                                               class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            @if(Auth::user()->can('employee.salary.advance.edit'))
+                                                <a href="{{ route('employee.salary.advance.edit',$item->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('employee.salary.advance.delete'))
+                                                <a href="{{ route('employee.salary.advance.delete',$item->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
 
                                         </td>
                                     </tr>

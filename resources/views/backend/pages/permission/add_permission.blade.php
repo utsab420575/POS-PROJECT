@@ -73,6 +73,7 @@
                                                     <option value="orders"> Orders</option>
                                                     <option value="stock"> Stock </option>
                                                     <option value="roles"> Roles</option>
+                                                    <option value="role_assignment_user">Role Assignment For User</option>
 
                                                 </select>
 

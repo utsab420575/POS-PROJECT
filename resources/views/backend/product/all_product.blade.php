@@ -12,7 +12,8 @@
                     <div class="page-title-box">
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
-                                <a href="{{ route('product.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
+                                <a href="{{ route('product.add') }}"
+                                   class="btn btn-primary rounded-pill waves-effect waves-light">Add Product </a>
                             </ol>
                         </div>
                         <h4 class="page-title">All Product</h4>
@@ -46,16 +47,27 @@
                                 @foreach($product as $key=> $item)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td> <img src="{{ asset($item->product_image) }}" style="width:50px; height: 40px;"> </td>
+                                        <td><img src="{{ asset($item->product_image) }}"
+                                                 style="width:50px; height: 40px;"></td>
                                         <td>{{ $item->product_name }}</td>
                                         <td>{{ $item->category->category_name }}</td>
                                         <td>{{ $item->supplier->name}}</td>
                                         <td>{{ $item->product_code }}</td>
                                         <td>{{ $item->selling_price }}</td>
                                         <td>
-                                            <a href="{{ route('product.edit',$item->id) }}" class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
-                                            <a href="{{ route('product.barcode',$item->id) }}" class="btn btn-info rounded-pill waves-effect waves-light">Code</a>
-                                            <a href="{{ route('product.delete',$item->id) }}" class="btn btn-danger rounded-pill waves-effect waves-light" id="delete">Delete</a>
+                                            @if(Auth::user()->can('product.edit'))
+                                                <a href="{{ route('product.edit',$item->id) }}"
+                                                   class="btn btn-blue rounded-pill waves-effect waves-light">Edit</a>
+                                            @endif
+                                            @if(Auth::user()->can('product.barcode'))
+                                                <a href="{{ route('product.barcode',$item->id) }}"
+                                                   class="btn btn-info rounded-pill waves-effect waves-light">Code</a>
+                                            @endif
+                                            @if(Auth::user()->can('product.delete'))
+                                                <a href="{{ route('product.delete',$item->id) }}"
+                                                   class="btn btn-danger rounded-pill waves-effect waves-light"
+                                                   id="delete">Delete</a>
+                                            @endif
 
                                         </td>
                                     </tr>
@@ -70,11 +82,8 @@
             <!-- end row-->
 
 
-
-
         </div> <!-- container -->
 
     </div> <!-- content -->
-
 
 @endsection
