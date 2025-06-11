@@ -79,7 +79,7 @@
                                 <div class="form-group mb-3">
                                     <label for="firstname" class="form-label">All Customer </label>
 
-                                    <a href="{{ route('add.customer') }}" class="btn btn-primary rounded-pill waves-effect waves-light mb-2">Add Customer </a>
+                                    <a href="{{ route('customer.add') }}" class="btn btn-primary rounded-pill waves-effect waves-light mb-2">Add Customer </a>
 
 
                                     <select name="supplier_id" class="form-select" id="example-select">
